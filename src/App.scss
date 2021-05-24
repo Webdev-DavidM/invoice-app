@@ -1,0 +1,113 @@
+/* Global css resets for elements so I can style them */
+
+$font-family: 'Spartan', sans-serif;
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  font-size: 18px;
+}
+
+input:focus,
+button:focus {
+  outline: none;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* SASS colour variables */
+
+$purple: rgb(124, 93, 250);
+$lighter-purple: rgb(146, 119, 255);
+$nighttime-purple: rgb(30, 33, 57);
+$nighttime-lighter-purple: rgb(37, 41, 69);
+$duck-egg-blue: rbg(223, 227, 250);
+$darker-duck-egg: rgb(136, 142, 176);
+$faded-purple: rgb(126, 136, 196);
+$black: rgb(12, 14, 22);
+$red: rgb(236, 87, 87);
+$pink: rgb(248, 248, 251);
+$off-black: rgb(20, 22, 37);
+
+/* SASS fonts */
+
+@mixin fonts($size, $line, $spacing) {
+  font-size: $size;
+  line-height: $line;
+  letter-spacing: $spacing;
+  font: 700;
+  font-family: $font-family;
+}
+
+h1 {
+  @include fonts(32px, 36px, -1px);
+}
+h2 {
+  @include fonts(20px, 22px, -0.63px);
+}
+h3 {
+  @include fonts(16px, 24px, -0.8px);
+}
+h4 {
+  @include fonts(12px, 15px, -0.25px);
+}
+.body-1 {
+  @include fonts(12px, 15px, -0.25px);
+}
+.body-2 {
+  @include fonts(11px, 18px, -0.23px);
+}
+
+@mixin buttons(
+  $width,
+  $colour,
+  $background-colour,
+  $hover-color,
+  $hover-background
+) {
+  @include fonts(20px, 22px, -0.63px);
+  width: $width;
+  color: $colour;
+  background-color: $background-colour;
+  border-radius: 25px;
+  padding: 0.5rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  transition: all 0.4s ease-in-out;
+  &:hover {
+    background-color: $hover-background;
+    color: $hover-color;
+  }
+}
+
+
+
+
+
+
+
+.invoice-btn {
+  @include buttons(auto, blue, red, green, yellow);
+}
