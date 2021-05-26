@@ -1,3 +1,18 @@
+/* SASS colour variables */
+
+$purple: rgb(124, 93, 250);
+$lighter-purple: rgb(146, 119, 255);
+$nighttime-purple: rgb(30, 33, 57);
+$nighttime-lighter-purple: rgb(37, 41, 69);
+$duck-egg-blue: rgb(223, 227, 250);
+$darker-duck-egg: rgb(136, 142, 176);
+$faded-purple: rgb(126, 136, 196);
+$black: rgb(12, 14, 22);
+$red: rgb(236, 87, 87);
+$pink: rgb(248, 248, 251);
+$off-black: rgb(20, 22, 37);
+$light-background: rgb(248, 248, 251);
+
 /* Global css resets for elements so I can style them */
 
 $font-family: 'Spartan', sans-serif;
@@ -16,12 +31,14 @@ a {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  color: $black;
 }
 
 body {
   width: 100%;
   min-height: 100vh;
   font-size: 18px;
+  background-color: $light-background;
 }
 
 input:focus,
@@ -35,47 +52,33 @@ button {
   cursor: pointer;
 }
 
-/* SASS colour variables */
-
-$purple: rgb(124, 93, 250);
-$lighter-purple: rgb(146, 119, 255);
-$nighttime-purple: rgb(30, 33, 57);
-$nighttime-lighter-purple: rgb(37, 41, 69);
-$duck-egg-blue: rbg(223, 227, 250);
-$darker-duck-egg: rgb(136, 142, 176);
-$faded-purple: rgb(126, 136, 196);
-$black: rgb(12, 14, 22);
-$red: rgb(236, 87, 87);
-$pink: rgb(248, 248, 251);
-$off-black: rgb(20, 22, 37);
-
 /* SASS fonts */
 
-@mixin fonts($size, $line, $spacing) {
+@mixin fonts($size, $line, $spacing, $weight) {
   font-size: $size;
   line-height: $line;
   letter-spacing: $spacing;
-  font: 700;
+  font: $weight;
   font-family: $font-family;
 }
 
 h1 {
-  @include fonts(32px, 36px, -1px);
+  @include fonts(32px, 36px, -1px, 700);
 }
 h2 {
-  @include fonts(20px, 22px, -0.63px);
+  @include fonts(20px, 22px, -0.63px, 700);
 }
 h3 {
-  @include fonts(16px, 24px, -0.8px);
+  @include fonts(16px, 24px, -0.8px, 700);
 }
 h4 {
-  @include fonts(12px, 15px, -0.25px);
+  @include fonts(12px, 15px, -0.25px, 700);
 }
 .body-1 {
-  @include fonts(12px, 15px, -0.25px);
+  @include fonts(12px, 15px, -0.25px, 500);
 }
 .body-2 {
-  @include fonts(11px, 18px, -0.23px);
+  @include fonts(11px, 18px, -0.23px, 500);
 }
 
 @mixin buttons(
@@ -85,13 +88,13 @@ h4 {
   $hover-color,
   $hover-background
 ) {
-  @include fonts(20px, 22px, -0.63px);
+  @include fonts(20px, 22px, -0.63px, 700);
   width: $width;
   color: $colour;
   background-color: $background-colour;
-  border-radius: 25px;
+  border-radius: 50px;
   padding: 0.5rem;
-  height: 3rem;
+  height: 2.5rem;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -102,12 +105,182 @@ h4 {
   }
 }
 
+.main-invoice-container {
+  width: 100%;
+  padding: 1rem;
+  position: relative;
+  margin-top: 4rem;
+}
 
+/* Navbar */
 
+.navbar-flex-container {
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  top: 0;
+  left: 0;
+  height: 4rem;
+  width: 100%;
+  background: $nighttime-purple;
+  .logo-container {
+    position: relative;
+    width: 4rem;
+    height: 100%;
+    background: $purple;
+    border-radius: 0 1rem 1rem 0;
+    img {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      z-index: 200;
+    }
+  }
 
+  .nested-purple-pattern {
+    width: 4rem;
+    position: absolute;
+    left: 0;
+    z-index: 100;
+    border-radius: 1rem 0 1rem 0;
+    top: 50%;
+    background: $lighter-purple;
+    height: 50%;
+  }
 
+  .day-or-night-btn {
+    width: 5rem;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+  }
+  .avatar-container {
+    width: 4rem;
+    border-left: 0.5px solid #7e88c3;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
+    img {
+      width: 50%;
+      height: 50%;
+      border-radius: 50%;
+    }
+  }
+}
 
-.invoice-btn {
-  @include buttons(auto, blue, red, green, yellow);
+/* Invoice details ie no of invoices /filter / new btn */
+
+.invoice-details-container {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  .no-of-invoices-container {
+    h2 {
+      padding: 0.5rem 0;
+    }
+    .body-2,
+    span {
+      color: $darker-duck-egg;
+    }
+  }
+  .filter-container {
+    display: flex;
+    margin-left: auto;
+    padding: 0 0.5rem;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 6rem;
+  }
+
+  .new-invoice-btn {
+    .button-circle {
+      background: white;
+      border-radius: 50px;
+      width: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 2rem;
+      margin-left: -8px;
+      img {
+        width: 40%;
+        height: 40%;
+      }
+    }
+    @include fonts(12px, 15px, -0.25px, 700);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+    @include buttons(5rem, white, $purple, white, $lighter-purple);
+    h4 {
+      color: white !important;
+      margin-right: -6px;
+    }
+  }
+}
+
+/* Invoice container */
+
+.invoice-flex-container-and-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 8rem;
+  background-color: white;
+  margin: 1rem 0;
+  box-shadow: 0px 8px 17px -1px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+  flex-wrap: wrap;
+  * {
+    font-family: $font-family;
+  }
+
+  .id-container {
+    height: 40%;
+    span:first-child {
+      color: $faded-purple;
+    }
+  }
+  .due-date {
+    color: $faded-purple;
+    height: 20%;
+    margin: 0.5rem 0rem;
+  }
+
+  .price {
+    height: 30%;
+    padding: 1rem 0;
+  }
+  .name {
+    align-self: flex-end;
+    height: 50%;
+    color: $faded-purple;
+  }
+
+  .status {
+    height: 50%;
+    align-self: flex-end;
+    width: 6rem;
+    height: 2rem;
+    display: flex;
+    justify-content: space-evenly;
+    background-color: rgba(46, 204, 113, 0.1);
+    align-items: center;
+    border-radius: 5px;
+    .circle-container {
+      width: 0.6rem;
+      background-color: #2ecc71;
+      height: 0.6rem;
+      border-radius: 50%;
+    }
+
+    color: #2ecc71;
+  }
 }
