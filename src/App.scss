@@ -81,6 +81,26 @@ h4 {
   @include fonts(11px, 18px, -0.23px, 500);
 }
 
+@mixin status-button($width, $height) {
+  height: $height;
+  align-self: flex-end;
+  @include fonts(16px, 24px, -0.8px, 700);
+  width: 8rem;
+  display: flex;
+  padding: 0 1rem;
+  justify-content: space-evenly;
+  color: #2ecc71;
+  background-color: rgba(46, 204, 113, 0.1);
+  align-items: center;
+  border-radius: 5px;
+  .circle-container {
+    width: 0.6rem;
+    background-color: #2ecc71;
+    height: 0.6rem;
+    border-radius: 50%;
+  }
+}
+
 @mixin buttons(
   $width,
   $colour,
@@ -155,6 +175,9 @@ h4 {
     justify-content: center;
     align-items: center;
     margin-left: auto;
+    &:hover {
+      cursor: pointer;
+    }
   }
   .avatar-container {
     width: 4rem;
@@ -174,7 +197,7 @@ h4 {
 
 /* Invoice details ie no of invoices /filter / new btn */
 
-.invoice-details-container {
+.invoice-header-container {
   display: flex;
   width: 100%;
   align-items: center;
@@ -195,6 +218,39 @@ h4 {
     justify-content: space-evenly;
     align-items: center;
     width: 6rem;
+    position: relative;
+    button {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      width: 8rem;
+    }
+    .drop-down-container {
+      position: absolute;
+      box-shadow: 0px 8px 17px -1px rgba(0, 0, 0, 0.6);
+      top: 2rem;
+      border-radius: 10px;
+      width: 10rem;
+      padding: 1.5rem;
+      height: auto;
+      background-color: white;
+      transition: all 0.3s ease-in-out;
+      label {
+        display: flex;
+        cursor: pointer;
+        margin-bottom: 0.5rem;
+        &:last-child {
+          margin: 0;
+        }
+        h4 {
+          transition: color 0.4s ease-in-out;
+          padding-left: 1rem;
+          &:hover {
+            color: $faded-purple;
+          }
+        }
+      }
+    }
   }
 
   .new-invoice-btn {
@@ -225,6 +281,26 @@ h4 {
   }
 }
 
+/* dropdown container transition */
+
+.alert-enter {
+  opacity: 0;
+  transform: scale(0.9);
+}
+.alert-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 300ms, transform 300ms;
+}
+.alert-exit {
+  opacity: 1;
+}
+.alert-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 300ms, transform 300ms;
+}
+
 /* Invoice container */
 
 .invoice-flex-container-and-btn {
@@ -233,11 +309,18 @@ h4 {
   justify-content: space-evenly;
   width: 100%;
   height: 8rem;
+  border-radius: 10px;
   background-color: white;
   margin: 1rem 0;
   box-shadow: 0px 8px 17px -1px rgba(0, 0, 0, 0.05);
   padding: 1.5rem;
   flex-wrap: wrap;
+  border: 1px solid white;
+  transition: border 0.4s ease-in-out;
+  &:hover {
+    cursor: pointer;
+    border: 1px solid rgb(124, 93, 250);
+  }
   * {
     font-family: $font-family;
   }
@@ -264,13 +347,15 @@ h4 {
     color: $faded-purple;
   }
 
-  .status {
+  .status-pending {
     height: 50%;
     align-self: flex-end;
-    width: 6rem;
-    height: 2rem;
+    @include fonts(16px, 24px, -0.8px, 700);
+    width: 8rem;
     display: flex;
+    padding: 0 1rem;
     justify-content: space-evenly;
+    color: #2ecc71;
     background-color: rgba(46, 204, 113, 0.1);
     align-items: center;
     border-radius: 5px;
@@ -280,7 +365,362 @@ h4 {
       height: 0.6rem;
       border-radius: 50%;
     }
+  }
+}
 
-    color: #2ecc71;
+/* Invoices container transition */
+
+.invoices-move-enter {
+  opacity: 0;
+}
+.invoices-move-enter-active {
+  opacity: 1;
+
+  transition: opacity 500ms;
+}
+.invoices-move-exit {
+  opacity: 1;
+}
+.invoices-move-exit-active {
+  opacity: 0;
+
+  transition: opacity 300ms;
+}
+/* Invoice details container including transition */
+
+.invoicesDetails-move-enter {
+  opacity: 0;
+  transform: translateX(-80%);
+}
+.invoicesDetails-move-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 500ms, transform 300ms;
+}
+.invoicesDetails-move-exit {
+  opacity: 1;
+}
+.invoicesDetails-move-exit-active {
+  opacity: 0;
+  transform: translateX(-80%);
+  transition: opacity 300ms, transform 300ms;
+}
+
+/* invoice details container section */
+
+.invoice-details-container {
+  position: relative;
+  * {
+    font-family: $font-family;
+  }
+  .go-back-section {
+    margin: 1rem 0;
+    width: 100%;
+    button {
+      display: flex;
+    }
+  }
+
+  .status-and-button {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0px 8px 17px -1px rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    h4 {
+      color: $faded-purple;
+    }
+    .status-button {
+      @include status-button(6rem, 2rem);
+      align-self: center;
+      margin-left: 0.5rem;
+    }
+    .edit-button {
+      margin-left: auto;
+
+      @include buttons(
+        4rem,
+        $faded-purple,
+        $light-background,
+        white,
+        $lighter-purple
+      );
+      @include fonts(16px, 24px, -0.8px, 700);
+    }
+    .delete-button {
+      margin: 0 0.5rem;
+      @include buttons(6rem, white, red, white, #e17055);
+      @include fonts(16px, 24px, -0.8px, 700);
+    }
+    .paid-button {
+      @include buttons(10rem, white, $purple, white, $lighter-purple);
+      @include fonts(16px, 24px, -0.8px, 700);
+    }
+  }
+  .main-info-flex-container {
+    padding: 1rem;
+    margin-top: 1rem;
+    width: 100%;
+    background-color: white;
+    div {
+      color: $faded-purple;
+    }
+    h4 {
+      margin-top: 0.5rem;
+    }
+    display: flex;
+    flex-wrap: wrap;
+    .id-container {
+      width: 100%;
+    }
+    .address {
+      width: 100%;
+      margin: 1rem 0;
+    }
+    .payment-dates {
+      width: 50%;
+      .payment {
+        margin-top: 1.5rem;
+      }
+    }
+    .email {
+      margin-top: 1rem;
+      width: 100%;
+    }
+    .sub-total-and-total-container {
+      background-color: $light-background;
+      padding: 0 1rem 1rem 1rem;
+      margin-top: 1rem;
+      width: 100%;
+
+      .invoice-item {
+        height: 4rem;
+        display: flex;
+        margin: 1rem;
+
+        flex-wrap: wrap;
+        flex-direction: column;
+        .invoice-quantity {
+          color: $faded-purple;
+          width: calc(50% -1rem);
+          width: 50%;
+          margin-top: -0.5rem;
+        }
+        .invoice-name {
+          height: 50%;
+          width: calc(50% -1rem);
+        }
+        .invoice-price {
+          width: 50%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+        }
+      }
+    }
+    .grand-total {
+      background-color: $nighttime-purple;
+      border-radius: 0 0 10px 10px;
+      padding: 1rem;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      div {
+        color: $light-background;
+      }
+      h2 {
+        color: white;
+      }
+    }
+  }
+}
+
+.fixed-buttons {
+  position: fixed;
+  background-color: white;
+  height: 4rem;
+  width: 100vw;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 0;
+  left: 0;
+  top: calc(100% - 4rem);
+  .edit-button {
+    @include buttons(
+      3rem,
+      $faded-purple,
+      $light-background,
+      white,
+      $lighter-purple
+    );
+    @include fonts(12px, 15px, -0.25px, 700);
+  }
+  .delete-button {
+    margin: 0 0.5rem;
+    @include buttons(5rem, white, red, white, #e17055);
+    @include fonts(12px, 15px, -0.25px, 700);
+  }
+  .paid-button {
+    @include buttons(6rem, white, $purple, white, $lighter-purple);
+    @include fonts(12px, 15px, -0.25px, 700);
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .main-invoice-container {
+    padding: 3rem;
+  }
+
+  /* invoice header component */
+  .invoice-header-container {
+    .no-of-invoices-container {
+      h2 {
+        @include fonts(32px, 36px, -1px, 700);
+      }
+      .body-2 {
+        @include fonts(13px, 15px, -0.25px, 500);
+      }
+    }
+
+    .filter-container {
+      display: flex;
+      margin-left: 0;
+      padding: 0 0.5rem;
+      margin-left: 25%;
+      justify-content: space-evenly;
+      align-items: center;
+      width: 10rem;
+    }
+    .new-invoice-btn {
+      @include buttons(8rem, white, $purple, white, $lighter-purple);
+    }
+  }
+
+  /* invoices */
+  .invoice-flex-container-and-btn {
+    flex-direction: row;
+    align-items: center;
+
+    justify-content: space-evenly;
+    height: 5rem;
+    &:hover {
+      cursor: unset;
+    }
+    .id-container,
+    .name,
+    .total,
+    .due-date,
+    .status-pending {
+      height: 1rem;
+      width: 15%;
+      display: flex;
+      align-items: center;
+    }
+    .due-date {
+      width: 20%;
+    }
+
+    .name,
+    .status-pending {
+      align-self: unset;
+      height: 2rem;
+      width: 20%;
+    }
+    .id-container {
+      order: 0;
+    }
+    .due-date {
+      order: 1;
+    }
+    .total {
+      order: 3;
+    }
+    .name {
+      order: 2;
+    }
+    .status-pending {
+      order: 4;
+    }
+    button {
+      order: 5;
+    }
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  /* main container */
+  .main-invoice-container {
+    width: 70%;
+    margin: auto;
+    max-width: 1200px;
+  }
+
+  /* Navbar */
+
+  .navbar-flex-container {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 5rem;
+    background: $nighttime-purple;
+    border-radius: 0 1rem 1rem 0;
+    .logo-container {
+      position: relative;
+      width: 100%;
+      height: 5rem;
+      background: $purple;
+      border-radius: 0 1rem 1rem 0;
+      img {
+        position: absolute;
+        top: 2rem;
+        left: 1.5rem;
+        z-index: 200;
+        width: 2rem;
+        height: 2rem;
+      }
+    }
+
+    .nested-purple-pattern {
+      width: 5rem;
+      position: absolute;
+      left: 0;
+      z-index: 100;
+      border-radius: 1rem 0 1rem 0;
+      top: 3rem;
+      background: $lighter-purple;
+      height: 2.5rem;
+    }
+
+    .day-or-night-btn {
+      width: 5rem;
+      height: 5rem;
+      margin: auto 0 0 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .avatar-container {
+      width: 5rem;
+      border-top: 0.5px solid #7e88c3;
+      height: 6rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        width: 50%;
+        height: 50%;
+        border-radius: 50%;
+      }
+    }
   }
 }
