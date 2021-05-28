@@ -19,6 +19,7 @@ export default function InvoiceDetails() {
     createdAt,
     items,
     total,
+    description,
   } = selectedInvoice[0];
 
   useEffect(() => {
@@ -66,6 +67,12 @@ export default function InvoiceDetails() {
         <div className='main-info-flex-container'>
           <h4 className='id-container'>
             <span>#</span> {id}
+            <Media
+              query='(min-width: 768px)'
+              render={() => {
+                return <div className='body-2 description'>{description}</div>;
+              }}
+            />
           </h4>
           <div className='address'>
             <div className='body-2'>{senderAddress.street}</div>
@@ -98,12 +105,12 @@ export default function InvoiceDetails() {
               query='(min-width: 768px)'
               render={() => {
                 return (
-                  <>
-                    <div className='body-2'>Item Name</div>
-                    <div className='body-2'>QTY</div>
-                    <div className='body-2'>Price</div>
-                    <div className='body-2'>Total</div>
-                  </>
+                  <div className='titles-container'>
+                    <div className='body-2 item'>Item Name</div>
+                    <div className='body-2 qty'>QTY</div>
+                    <div className='body-2 price'>Price</div>
+                    <div className='body-2 total'>Total</div>
+                  </div>
                 );
               }}
             />
@@ -111,10 +118,26 @@ export default function InvoiceDetails() {
               <div className='invoice-item'>
                 <h4 className='invoice-name'>{item.name}</h4>
                 <h4 className='invoice-quantity'>
-                  {item.quantity} x £&nbsp;{item.price}
+                  {item.quantity}
+                  <Media
+                    query='(max-width: 768px)'
+                    render={() => {
+                      return <> x £{item.price.toFixed(2)}</>;
+                    }}
+                  />
                 </h4>
+                <Media
+                  query='(min-width: 768px)'
+                  render={() => {
+                    return (
+                      <h4 className='invoice-unit-price'>
+                        £ {item.price.toFixed(2)}
+                      </h4>
+                    );
+                  }}
+                />
                 <h4 className='invoice-price'>
-                  £&nbsp;{item.price.toFixed(2)}
+                  £&nbsp;{(item.price * item.quantity).toFixed(2)}
                 </h4>
               </div>
             ))}

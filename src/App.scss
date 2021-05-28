@@ -424,6 +424,7 @@ h4 {
   .status-and-button {
     background-color: white;
     padding: 1rem;
+
     border-radius: 10px;
     box-shadow: 0px 8px 17px -1px rgba(0, 0, 0, 0.05);
     display: flex;
@@ -436,10 +437,11 @@ h4 {
       @include status-button(6rem, 2rem);
       align-self: center;
       margin-left: 0.5rem;
+      height: 2.5rem !important;
     }
     .edit-button {
       margin-left: auto;
-
+      height: 3rem !important;
       @include buttons(
         4rem,
         $faded-purple,
@@ -451,12 +453,14 @@ h4 {
     }
     .delete-button {
       margin: 0 0.5rem;
-      @include buttons(6rem, white, red, white, #e17055);
+      height: 3rem !important;
+      @include buttons(6rem, white, #e74c3c, white, #e17055);
       @include fonts(16px, 24px, -0.8px, 700);
     }
     .paid-button {
       @include buttons(10rem, white, $purple, white, $lighter-purple);
       @include fonts(16px, 24px, -0.8px, 700);
+      height: 3rem !important;
     }
   }
   .main-info-flex-container {
@@ -494,11 +498,31 @@ h4 {
       padding: 0 1rem 1rem 1rem;
       margin-top: 1rem;
       width: 100%;
-
+      .titles-container {
+        padding: 1rem 1rem 0 1rem;
+        display: flex;
+        justify-content: space-between;
+        .item {
+          width: 30%;
+        }
+        .qty {
+          width: 5%;
+          text-align: end;
+        }
+        .price {
+          width: 12%;
+          text-align: end;
+        }
+        .total {
+          width: 10%;
+          text-align: end;
+        }
+      }
       .invoice-item {
         height: 4rem;
         display: flex;
         margin: 1rem;
+        width: calc(100% - 2rem);
 
         flex-wrap: wrap;
         flex-direction: column;
@@ -648,6 +672,91 @@ h4 {
     }
     button {
       order: 5;
+    }
+  }
+
+  /* main info flex container */
+  .invoice-details-container {
+    .main-info-flex-container {
+      * {
+        @include fonts(14px, 24px, -0.8px, 700);
+      }
+      h4 {
+        @include fonts(16px, 24px, -0.8px, 700);
+      }
+      .id-container {
+        width: 50%;
+
+        div {
+          margin-top: 0.5rem;
+        }
+      }
+      .address {
+        width: 50%;
+
+        text-align: end;
+      }
+      .payment-dates {
+        width: 30%;
+      }
+      .invoice-address {
+        width: 30%;
+      }
+      .email {
+        width: 40%;
+        margin-top: 0;
+      }
+      .grand-total {
+        h2 {
+          @include fonts(28px, 36px, -1px, 700);
+        }
+      }
+    }
+  }
+
+  /* invoice details container */
+  .sub-total-and-total-container {
+    .invoice-item {
+      height: 4rem;
+      display: flex;
+      margin: 1rem;
+      width: 100%;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      flex-direction: row !important;
+      .invoice-name {
+        height: 100% !important;
+        margin-top: 0;
+        display: flex;
+        align-items: center;
+        // width: calc(50% -1rem);
+        width: 30%;
+      }
+      .invoice-quantity,
+      .invoice-unit-price {
+        color: $faded-purple;
+        width: 5% !important;
+
+        // width: calc(50% -1rem);
+        // width: 50%;
+        margin-top: 0 !important;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+      }
+
+      .invoice-unit-price {
+        width: 16% !important;
+      }
+
+      .invoice-price {
+        width: 10% !important;
+        margin-top: 0 !important;
+        height: 100% !important;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+      }
     }
   }
 }
