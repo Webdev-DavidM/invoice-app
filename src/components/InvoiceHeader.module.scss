@@ -1,0 +1,134 @@
+@import '../App.scss';
+
+/* dropdown container transition */
+
+.alert-enter {
+  opacity: 0;
+  transform: scale(0.9);
+}
+.alert-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 300ms, transform 300ms;
+}
+.alert-exit {
+  opacity: 1;
+}
+.alert-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 300ms, transform 300ms;
+}
+
+/* Invoice details ie no of invoices /filter / new btn */
+
+.invoice_header_container {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  .no_of_invoices_container {
+    h2 {
+      padding: 0.5rem 0;
+    }
+    .body_2,
+    span {
+      color: $darker-duck-egg;
+    }
+  }
+  .filter_container {
+    display: flex;
+    margin-left: auto;
+    padding: 0 0.5rem;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 6rem;
+    position: relative;
+    button {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      width: 8rem;
+    }
+    .drop_down_container {
+      position: absolute;
+      box-shadow: 0px 8px 17px -1px rgba(0, 0, 0, 0.6);
+      top: 2rem;
+      border-radius: 10px;
+      width: 10rem;
+      padding: 1.5rem;
+      height: auto;
+      background-color: white;
+      transition: all 0.3s ease-in-out;
+      label {
+        display: flex;
+        cursor: pointer;
+        margin-bottom: 0.5rem;
+        &:last-child {
+          margin: 0;
+        }
+        h4 {
+          transition: color 0.4s ease-in-out;
+          padding-left: 1rem;
+          &:hover {
+            color: $faded-purple;
+          }
+        }
+      }
+    }
+  }
+
+  .new_invoice_btn {
+    .button_circle {
+      background: white;
+      border-radius: 50px;
+      width: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 2rem;
+      margin-left: -8px;
+      img {
+        width: 40%;
+        height: 40%;
+      }
+    }
+    @include fonts(12px, 15px, -0.25px, 700);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+    @include buttons(5rem, white, $purple, white, $lighter-purple);
+    h4 {
+      color: white !important;
+      margin-right: -6px;
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  /* invoice header component */
+  .invoice_header_container {
+    .no_of_invoices_container {
+      h2 {
+        @include fonts(32px, 36px, -1px, 700);
+      }
+      .body_2 {
+        @include fonts(13px, 15px, -0.25px, 500);
+      }
+    }
+
+    .filter_container {
+      display: flex;
+      margin-left: 0;
+      padding: 0 0.5rem;
+      margin-left: 25%;
+      justify-content: space-evenly;
+      align-items: center;
+      width: 10rem;
+    }
+    .new_invoice_btn {
+      @include buttons(8rem, white, $purple, white, $lighter-purple);
+    }
+  }
+}

@@ -2,15 +2,16 @@ import React, { useContext, useState } from 'react';
 import { InvoiceContext } from '../App';
 import Media from 'react-media';
 import { CSSTransition } from 'react-transition-group';
+import styles from './InvoiceHeader.module.scss';
 
 export default function InvoiceHeader() {
   const { invoices, dayTheme, setDayTheme } = useContext(InvoiceContext);
   const [showDropDown, setToggleDropDown] = useState(false);
   return (
-    <div className='invoice-header-container'>
-      <div className='no-of-invoices-container'>
+    <div className={styles.invoice_header_container}>
+      <div className={styles.no_of_invoices_container}>
         <h2>Invoices</h2>
-        <div className='body-2'>
+        <div className={styles.body_2}>
           <Media
             query='(min-width: 768px)'
             render={() => <span>There are </span>}
@@ -20,7 +21,7 @@ export default function InvoiceHeader() {
           <span> invoices</span>
         </div>
       </div>
-      <div className='filter-container'>
+      <div className={styles.filter_container}>
         <button
           onClick={() =>
             setToggleDropDown((prevToggleState) => !prevToggleState)
@@ -42,7 +43,7 @@ export default function InvoiceHeader() {
           timeout={500}
           classNames='alert'
           unmountOnExit>
-          <div className='drop-down-container'>
+          <div className={styles.drop_down_container}>
             <label className='draft'>
               <input type='checkbox' />
               <h4>Draft</h4>
@@ -58,8 +59,8 @@ export default function InvoiceHeader() {
           </div>
         </CSSTransition>
       </div>
-      <button className='new-invoice-btn'>
-        <div className='button-circle'>
+      <button className={styles.new_invoice_btn}>
+        <div className={styles.button_circle}>
           <img
             src={`${process.env.PUBLIC_URL}/assets/icon-plus.svg`}
             alt='new invoice'

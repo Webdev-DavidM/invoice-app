@@ -1,0 +1,130 @@
+@import '../App.scss';
+
+/* Navbar */
+
+.navbar_flex_container {
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  top: 0;
+  left: 0;
+  height: 4rem;
+  width: 100%;
+  background: $nighttime-purple;
+  .logo_container {
+    position: relative;
+    width: 4rem;
+    height: 100%;
+    background: $purple;
+    border-radius: 0 1rem 1rem 0;
+    img {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      z-index: 200;
+    }
+  }
+
+  .nested_purple_pattern {
+    width: 4rem;
+    position: absolute;
+    left: 0;
+    z-index: 100;
+    border-radius: 1rem 0 1rem 0;
+    top: 50%;
+    background: $lighter-purple;
+    height: 50%;
+  }
+
+  .day_or_night_btn {
+    width: 5rem;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  .avatar_container {
+    width: 4rem;
+    border-left: 0.5px solid #7e88c3;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      width: 50%;
+      height: 50%;
+      border-radius: 50%;
+    }
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  /* Navbar */
+
+  .navbar_flex_container {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 5rem;
+    background: $nighttime-purple;
+    border-radius: 0 1rem 1rem 0;
+    .logo_container {
+      position: relative;
+      width: 100%;
+      height: 5rem;
+      background: $purple;
+      border-radius: 0 1rem 1rem 0;
+      img {
+        position: absolute;
+        top: 2rem;
+        left: 1.5rem;
+        z-index: 200;
+        width: 2rem;
+        height: 2rem;
+      }
+    }
+
+    .nested_purple_pattern {
+      width: 5rem;
+      position: absolute;
+      left: 0;
+      z-index: 100;
+      border-radius: 1rem 0 1rem 0;
+      top: 3rem;
+      background: $lighter-purple;
+      height: 2.5rem;
+    }
+
+    .day_or_night_btn {
+      width: 5rem;
+      height: 5rem;
+      margin: auto 0 0 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .avatar_container {
+      width: 5rem;
+      border-top: 0.5px solid #7e88c3;
+      height: 6rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        width: 50%;
+        height: 50%;
+        border-radius: 50%;
+      }
+    }
+  }
+}

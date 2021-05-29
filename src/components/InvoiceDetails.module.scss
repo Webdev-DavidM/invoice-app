@@ -1,82 +1,13 @@
-@import './scss/mixins.scss';
-
-@import './scss/variables.scss';
-
-@import './scss/defaults.scss';
-
-.main-invoice-container {
-  width: 100%;
-  padding: 1rem;
-  position: relative;
-  margin-top: 4rem;
-}
-
-/* dropdown container transition */
-
-.alert-enter {
-  opacity: 0;
-  transform: scale(0.9);
-}
-.alert-enter-active {
-  opacity: 1;
-  transform: translateX(0);
-  transition: opacity 300ms, transform 300ms;
-}
-.alert-exit {
-  opacity: 1;
-}
-.alert-exit-active {
-  opacity: 0;
-  transform: scale(0.9);
-  transition: opacity 300ms, transform 300ms;
-}
-
-/* Invoices container transition */
-
-.invoices-move-enter {
-  opacity: 0;
-}
-.invoices-move-enter-active {
-  opacity: 1;
-
-  transition: opacity 500ms;
-}
-.invoices-move-exit {
-  opacity: 1;
-}
-.invoices-move-exit-active {
-  opacity: 0;
-
-  transition: opacity 300ms;
-}
-/* Invoice details container including transition */
-
-.invoicesDetails-move-enter {
-  opacity: 0;
-  transform: translateX(-80%);
-}
-.invoicesDetails-move-enter-active {
-  opacity: 1;
-  transform: translateX(0);
-  transition: opacity 500ms, transform 300ms;
-}
-.invoicesDetails-move-exit {
-  opacity: 1;
-}
-.invoicesDetails-move-exit-active {
-  opacity: 0;
-  transform: translateX(-80%);
-  transition: opacity 300ms, transform 300ms;
-}
+@import '../App.scss';
 
 /* invoice details container section */
 
-.invoice-details-container {
+.invoice_details_container {
   position: relative;
   * {
     font-family: $font-family;
   }
-  .go-back-section {
+  .go_back_section {
     margin: 1rem 0;
     width: 100%;
     button {
@@ -84,7 +15,7 @@
     }
   }
 
-  .status-and-button {
+  .status_and_button {
     background-color: white;
     padding: 1rem;
 
@@ -96,13 +27,13 @@
     h4 {
       color: $faded-purple;
     }
-    .status-button {
+    .status_button {
       @include status-button(6rem, 2rem);
       align-self: center;
       margin-left: 0.5rem;
       height: 2.5rem !important;
     }
-    .edit-button {
+    .edit_button {
       margin-left: auto;
       height: 3rem !important;
       @include buttons(
@@ -114,19 +45,19 @@
       );
       @include fonts(16px, 24px, -0.8px, 700);
     }
-    .delete-button {
+    .delete_button {
       margin: 0 0.5rem;
       height: 3rem !important;
       @include buttons(6rem, white, #e74c3c, white, #e17055);
       @include fonts(16px, 24px, -0.8px, 700);
     }
-    .paid-button {
+    .paid_button {
       @include buttons(10rem, white, $purple, white, $lighter-purple);
       @include fonts(16px, 24px, -0.8px, 700);
       height: 3rem !important;
     }
   }
-  .main-info-flex-container {
+  .main_info_flex_container {
     padding: 1rem;
     margin-top: 1rem;
     width: 100%;
@@ -139,14 +70,14 @@
     }
     display: flex;
     flex-wrap: wrap;
-    .id-container {
+    .id_container {
       width: 100%;
     }
     .address {
       width: 100%;
       margin: 1rem 0;
     }
-    .payment-dates {
+    .payment_dates {
       width: 50%;
       .payment {
         margin-top: 1.5rem;
@@ -156,12 +87,12 @@
       margin-top: 1rem;
       width: 100%;
     }
-    .sub-total-and-total-container {
+    .sub_total_and_total_container {
       background-color: $light-background;
       padding: 0 1rem 1rem 1rem;
       margin-top: 1rem;
       width: 100%;
-      .titles-container {
+      .titles_container {
         padding: 1rem 1rem 0 1rem;
         display: flex;
         justify-content: space-between;
@@ -181,7 +112,7 @@
           text-align: end;
         }
       }
-      .invoice-item {
+      .invoice_item {
         height: 4rem;
         display: flex;
         margin: 1rem;
@@ -189,17 +120,17 @@
 
         flex-wrap: wrap;
         flex-direction: column;
-        .invoice-quantity {
+        .invoice_quantity {
           color: $faded-purple;
           width: calc(50% -1rem);
           width: 50%;
           margin-top: -0.5rem;
         }
-        .invoice-name {
+        .invoice_name {
           height: 50%;
           width: calc(50% -1rem);
         }
-        .invoice-price {
+        .invoice_price {
           width: 50%;
           height: 100%;
           display: flex;
@@ -208,7 +139,7 @@
         }
       }
     }
-    .grand-total {
+    .grand_total {
       background-color: $nighttime-purple;
       border-radius: 0 0 10px 10px;
       padding: 1rem;
@@ -226,7 +157,7 @@
   }
 }
 
-.fixed-buttons {
+.fixed_buttons {
   position: fixed;
   background-color: white;
   height: 4rem;
@@ -237,7 +168,7 @@
   padding: 0;
   left: 0;
   top: calc(100% - 4rem);
-  .edit-button {
+  .edit_button {
     @include buttons(
       3rem,
       $faded-purple,
@@ -247,114 +178,59 @@
     );
     @include fonts(12px, 15px, -0.25px, 700);
   }
-  .delete-button {
+  .delete_button {
     margin: 0 0.5rem;
     @include buttons(5rem, white, red, white, #e17055);
     @include fonts(12px, 15px, -0.25px, 700);
   }
-  .paid-button {
+  .paid_button {
     @include buttons(6rem, white, $purple, white, $lighter-purple);
     @include fonts(12px, 15px, -0.25px, 700);
   }
 }
 
 @media only screen and (min-width: 768px) {
-  .main-invoice-container {
-    padding: 3rem;
-  }
-
-  /* invoices */
-  .invoice-flex-container-and-btn {
-    flex-direction: row;
-    align-items: center;
-
-    justify-content: space-evenly;
-    height: 5rem;
-    &:hover {
-      cursor: unset;
-    }
-    .id-container,
-    .name,
-    .total,
-    .due-date,
-    .status-pending {
-      height: 1rem;
-      width: 15%;
-      display: flex;
-      align-items: center;
-    }
-    .due-date {
-      width: 20%;
-    }
-
-    .name,
-    .status-pending {
-      align-self: unset;
-      height: 2rem;
-      width: 20%;
-    }
-    .id-container {
-      order: 0;
-    }
-    .due-date {
-      order: 1;
-    }
-    .total {
-      order: 3;
-    }
-    .name {
-      order: 2;
-    }
-    .status-pending {
-      order: 4;
-    }
-    button {
-      order: 5;
-    }
-  }
-
   /* main info flex container */
-  .invoice-details-container {
-    .main-info-flex-container {
+  .invoice_details_container {
+    .main_info_flex_container {
       * {
         @include fonts(14px, 24px, -0.8px, 700);
       }
       h4 {
         @include fonts(16px, 24px, -0.8px, 700);
       }
-      .id-container {
-        width: 50%;
+      .id_container {
+        width: 50% !important;
 
         div {
           margin-top: 0.5rem;
         }
       }
       .address {
-        width: 50%;
+        width: 50% !important;
 
         text-align: end;
       }
-      .payment-dates {
+      .payment_dates {
         width: 30%;
       }
-      .invoice-address {
+      .invoice_address {
         width: 30%;
       }
       .email {
         width: 40%;
         margin-top: 0;
       }
-      .grand-total {
+      .grand_total {
         h2 {
           @include fonts(28px, 36px, -1px, 700);
         }
       }
     }
   }
-
   /* invoice details container */
-  .sub-total-and-total-container {
-    .invoice-item {
+  .sub_total_and_total_container {
+    .invoice_item {
       height: 4rem;
       display: flex;
       margin: 1rem;
@@ -362,7 +238,7 @@
       flex-wrap: wrap;
       justify-content: space-between;
       flex-direction: row !important;
-      .invoice-name {
+      .invoice_name {
         height: 100% !important;
         margin-top: 0;
         display: flex;
@@ -370,8 +246,8 @@
         // width: calc(50% -1rem);
         width: 30%;
       }
-      .invoice-quantity,
-      .invoice-unit-price {
+      .invoice_quantity,
+      .invoice_unit_price {
         color: $faded-purple;
         width: 5% !important;
 
@@ -383,11 +259,11 @@
         justify-content: flex-end;
       }
 
-      .invoice-unit-price {
+      .invoice_unit_price {
         width: 16% !important;
       }
 
-      .invoice-price {
+      .invoice_price {
         width: 10% !important;
         margin-top: 0 !important;
         height: 100% !important;
@@ -396,14 +272,5 @@
         justify-content: flex-end;
       }
     }
-  }
-}
-
-@media only screen and (min-width: 1024px) {
-  /* main container */
-  .main-invoice-container {
-    width: 70%;
-    margin: auto;
-    max-width: 1200px;
   }
 }

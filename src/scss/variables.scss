@@ -1,0 +1,35 @@
+/* SASS colour and font variables */
+
+$purple: rgb(124, 93, 250);
+$lighter-purple: rgb(146, 119, 255);
+$nighttime-purple: rgb(30, 33, 57);
+$nighttime-lighter-purple: rgb(37, 41, 69);
+$duck-egg-blue: rgb(223, 227, 250);
+$darker-duck-egg: rgb(136, 142, 176);
+$faded-purple: rgb(126, 136, 196);
+$black: rgb(12, 14, 22);
+$red: rgb(236, 87, 87);
+$pink: rgb(248, 248, 251);
+$off-black: rgb(20, 22, 37);
+$light-background: rgb(248, 248, 251);
+
+$font-family: 'Spartan', sans-serif;
+
+h1 {
+  @include fonts(32px, 36px, -1px, 700);
+}
+h2 {
+  @include fonts(20px, 22px, -0.63px, 700);
+}
+h3 {
+  @include fonts(16px, 24px, -0.8px, 700);
+}
+h4 {
+  @include fonts(12px, 15px, -0.25px, 700);
+}
+.body_1 {
+  @include fonts(12px, 15px, -0.25px, 500);
+}
+.body_2 {
+  @include fonts(11px, 18px, -0.23px, 500);
+}

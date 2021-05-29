@@ -3,6 +3,7 @@ import Media from 'react-media';
 import { InvoiceContext } from '../App';
 import { formatDateUK } from '../helpers/formatDate';
 import { CSSTransition } from 'react-transition-group';
+import styles from './Invoice.module.scss';
 
 export default function Invoice({ invoice }) {
   const { id, paymentDue, clientName, total, status } = invoice;
@@ -20,20 +21,22 @@ export default function Invoice({ invoice }) {
         in={showInvoices}
         timeout={500}
         mountOnEnter
-        classNames='invoices-move'
+        classNames={styles.invoices_move}
         unmountOnExit>
         <div
           onClick={() => chosenInvoice(id, false)}
-          className='invoice-flex-container-and-btn'>
-          <h4 className='id-container'>
+          className={styles.invoice_flex_container_and_btn}>
+          <h4 className={styles.id_container}>
             <span>#</span> {id}
           </h4>
-          <div className='due-date body-2'>{formattedDate}</div>
+          <div className={(styles.due_date, styles.body_2)}>
+            {formattedDate}
+          </div>
 
-          <h4 className='total'>£{total.toFixed(2)}</h4>
-          <div className='body-2 name'>{clientName}</div>
-          <div className='status-pending'>
-            <div className='circle-container'></div>
+          <h4 className={styles.total}>£{total.toFixed(2)}</h4>
+          <div className={(styles.body_2, styles.name)}>{clientName}</div>
+          <div className={styles.status_pending}>
+            <div className={styles.circle_container}></div>
             {status}
           </div>
           <Media

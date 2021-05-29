@@ -1,0 +1,51 @@
+@mixin fonts($size, $line, $spacing, $weight) {
+  font-size: $size;
+  line-height: $line;
+  letter-spacing: $spacing;
+  font: $weight;
+  font-family: $font-family;
+}
+
+@mixin status-button($width, $height) {
+  height: $height;
+  align-self: flex-end;
+  @include fonts(16px, 24px, -0.8px, 700);
+  width: 8rem;
+  display: flex;
+  padding: 0 1rem;
+  justify-content: space-evenly;
+  color: #2ecc71;
+  background-color: rgba(46, 204, 113, 0.1);
+  align-items: center;
+  border-radius: 5px;
+  .circle-container {
+    width: 0.6rem;
+    background-color: #2ecc71;
+    height: 0.6rem;
+    border-radius: 50%;
+  }
+}
+
+@mixin buttons(
+  $width,
+  $colour,
+  $background-colour,
+  $hover-color,
+  $hover-background
+) {
+  @include fonts(20px, 22px, -0.63px, 700);
+  width: $width;
+  color: $colour;
+  background-color: $background-colour;
+  border-radius: 50px;
+  padding: 0.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  transition: all 0.4s ease-in-out;
+  &:hover {
+    background-color: $hover-background;
+    color: $hover-color;
+  }
+}

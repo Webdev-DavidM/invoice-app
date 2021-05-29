@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { InvoiceContext } from '../App';
 import { formatDateUK } from '../helpers/formatDate';
 import Media from 'react-media';
+import styles from './InvoiceDetails.module.scss';
 
 export default function InvoiceDetails() {
   const [dueDate, setDueDate] = useState(null);
@@ -32,8 +33,8 @@ export default function InvoiceDetails() {
 
   return (
     <>
-      <div className='invoice-details-container'>
-        <h2 className='go-back-section '>
+      <div className={styles.invoice_details_container}>
+        <h2 className={styles.go_back_section}>
           <button onClick={() => goBack()}>
             {' '}
             <img
@@ -45,10 +46,10 @@ export default function InvoiceDetails() {
           </button>
         </h2>
 
-        <div className='status-and-button'>
+        <div className={styles.status_and_button}>
           <h4>status</h4>
-          <div className='status-button'>
-            <div className='circle-container'></div>
+          <div className={styles.status_button}>
+            <div className={styles.circle_container}></div>
             {status}
           </div>
           <Media
@@ -56,68 +57,74 @@ export default function InvoiceDetails() {
             render={() => {
               return (
                 <>
-                  <button className='edit-button'>Edit</button>
-                  <button className='delete-button'>Delete</button>
-                  <button className='paid-button'>Mark as paid</button>
+                  <button className={styles.edit_button}>Edit</button>
+                  <button className={styles.delete_button}>Delete</button>
+                  <button className={styles.paid_button}>Mark as paid</button>
                 </>
               );
             }}
           />
         </div>
-        <div className='main-info-flex-container'>
-          <h4 className='id-container'>
+        <div className={styles.main_info_flex_container}>
+          <h4 className={styles.id_container}>
             <span>#</span> {id}
             <Media
               query='(min-width: 768px)'
               render={() => {
-                return <div className='body-2 description'>{description}</div>;
+                return (
+                  <div className={(styles.body_2, styles.description)}>
+                    {description}
+                  </div>
+                );
               }}
             />
           </h4>
-          <div className='address'>
-            <div className='body-2'>{senderAddress.street}</div>
-            <div className='body-2'>{senderAddress.city}</div>
-            <div className='body-2'>{senderAddress.postCode}</div>
-            <div className='body-2'>{senderAddress.country}</div>
+          <div className={styles.address}>
+            <div className={styles.body_2}>{senderAddress.street}</div>
+            <div className={styles.body_2}>{senderAddress.city}</div>
+            <div className={styles.body_2}>{senderAddress.postCode}</div>
+            <div className={styles.body_2}>{senderAddress.country}</div>
           </div>
-          <div className='payment-dates'>
-            <div className='body-2 invoice'>Invoice Date</div>
+          <div className={styles.payment_dates}>
+            <div className={(styles.body_2, styles.invoice)}>Invoice Date</div>
             <h4>{invoiceDate}</h4>
-            <div className='body-2 payment'>Payment Date</div>
+            <div className={(styles.body_2, styles.payment)}>Payment Date</div>
             <h4>{dueDate}</h4>
           </div>
-          <div className='invoice-address'>
-            <div className='body-2'>Bill To</div>
+          <div className={styles.invoice_address}>
+            <div className={styles.body_2}>Bill To</div>
             <h4>{clientName}</h4>
-            <div className='body-2'>{clientAddress.street}</div>
-            <div className='body-2'>{clientAddress.city}</div>
-            <div className='body-2'>{clientAddress.postCode}</div>
-            <div className='body-2'>{clientAddress.country}</div>
-            <div className='body-2'></div>
+            <div className={styles.body_2}>{clientAddress.street}</div>
+            <div className={styles.body_2}>{clientAddress.city}</div>
+            <div className={styles.body_2}>{clientAddress.postCode}</div>
+            <div className={styles.body_2}>{clientAddress.country}</div>
+            <div className={styles.body_2}></div>
           </div>
-          <div className='email'>
-            <div className='body-2'>Sent to:</div>
+          <div className={styles.email}>
+            <div className={styles.body_2}>Sent to:</div>
             <h4>{clientEmail}</h4>
           </div>
 
-          <div className='sub-total-and-total-container'>
+          <div className={styles.sub_total_and_total_container}>
             <Media
               query='(min-width: 768px)'
               render={() => {
                 return (
-                  <div className='titles-container'>
-                    <div className='body-2 item'>Item Name</div>
-                    <div className='body-2 qty'>QTY</div>
-                    <div className='body-2 price'>Price</div>
-                    <div className='body-2 total'>Total</div>
+                  <div className={styles.titles_container}>
+                    <div className={(styles.body_2, styles.item)}>
+                      Item Name
+                    </div>
+                    <div className={(styles.body_2, styles.qty)}>QTY</div>
+                    <div className={(styles.body_2, styles.price)}>Price</div>
+                    <div className={(styles.body_2, styles.total)}>Total</div>
                   </div>
                 );
               }}
             />
             {items.map((item) => (
-              <div className='invoice-item'>
-                <h4 className='invoice-name'>{item.name}</h4>
-                <h4 className='invoice-quantity'>
+              <div className={styles.invoice_item}>
+                <h4 className={styles.invoice_name}>{item.name}</h4>
+                <h4 className={styles.invoice_quantity}>
                   {item.quantity}
                   <Media
                     query='(max-width: 768px)'
@@ -130,20 +137,20 @@ export default function InvoiceDetails() {
                   query='(min-width: 768px)'
                   render={() => {
                     return (
-                      <h4 className='invoice-unit-price'>
+                      <h4 className={styles.invoice_unit_price}>
                         £ {item.price.toFixed(2)}
                       </h4>
                     );
                   }}
                 />
-                <h4 className='invoice-price'>
+                <h4 className={styles.invoice_price}>
                   £&nbsp;{(item.price * item.quantity).toFixed(2)}
                 </h4>
               </div>
             ))}
           </div>
-          <div className='grand-total'>
-            <div className='body-2'>Grand Total</div>
+          <div className={styles.grand_total}>
+            <div className={styles.body_2}>Grand Total</div>
             <h2>£&nbsp; {total.toFixed(2)}</h2>
           </div>
         </div>
@@ -152,10 +159,10 @@ export default function InvoiceDetails() {
         query='(max-width: 768px)'
         render={() => {
           return (
-            <div className='fixed-buttons'>
-              <button className='edit-button'>Edit</button>
-              <button className='delete-button'>Delete</button>
-              <button className='paid-button'>Mark as paid</button>
+            <div className={styles.fixed_buttons}>
+              <button className={styles.edit_button}>Edit</button>
+              <button className={styles.delete_button}>Delete</button>
+              <button className={styles.paid_button}>Mark as paid</button>
             </div>
           );
         }}
