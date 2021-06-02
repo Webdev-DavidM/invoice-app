@@ -8,7 +8,13 @@ export default function InvoiceDetails() {
   const [dueDate, setDueDate] = useState(null);
   const [invoiceDate, setInvoiceDate] = useState(null);
 
-  const { goBack, selectedInvoice } = useContext(InvoiceContext);
+  const {
+    goBack,
+    selectedInvoice,
+    chosenInvoice,
+    invoiceToUpdate,
+    deleteInvoice,
+  } = useContext(InvoiceContext);
   const {
     status,
     id,
@@ -29,7 +35,6 @@ export default function InvoiceDetails() {
     let invoiceDate = formatDateUK(createdAt);
     setInvoiceDate(invoiceDate);
   }, [paymentDue, createdAt]);
-  console.log(items);
 
   return (
     <>
@@ -57,7 +62,11 @@ export default function InvoiceDetails() {
             render={() => {
               return (
                 <>
-                  <button className={styles.edit_button}>Edit</button>
+                  <button
+                    onClick={() => invoiceToUpdate()}
+                    className={styles.edit_button}>
+                    Edit
+                  </button>
                   <button className={styles.delete_button}>Delete</button>
                   <button className={styles.paid_button}>Mark as paid</button>
                 </>
@@ -160,7 +169,11 @@ export default function InvoiceDetails() {
         render={() => {
           return (
             <div className={styles.fixed_buttons}>
-              <button className={styles.edit_button}>Edit</button>
+              <button
+                onClick={() => invoiceToUpdate()}
+                className={styles.edit_button}>
+                Edit
+              </button>
               <button className={styles.delete_button}>Delete</button>
               <button className={styles.paid_button}>Mark as paid</button>
             </div>

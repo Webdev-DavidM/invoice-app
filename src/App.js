@@ -2,10 +2,9 @@ import './App.scss';
 import React, { useEffect, useState, createContext } from 'react';
 import invoicesData from './data.json';
 import NavBar from './components/NavBar';
-import NewInvoice from './components/NewInvoice';
 import InvoiceDetails from './components/InvoiceDetails';
 import Invoices from './components/Invoices';
-import EditInvoice from './components/EditInvoice';
+import EditOrCreateInvoice from './components/EditOrCreateInvoice';
 import InvoiceHeader from './components/InvoiceHeader';
 import { CSSTransition } from 'react-transition-group';
 export const InvoiceContext = createContext();
@@ -14,13 +13,16 @@ function App() {
   const [dayTheme, setDayTheme] = useState(true);
   const [invoices, setInvoices] = useState([]);
   const [newInvoice, setNewInvoice] = useState(false);
+  // Both the edit invoice page and the invoice details will use the data below //
   const [selectedInvoice, setSelectedInvoice] = useState(null);
+  const [showEditInvoice, setShowEditInvoice] = useState(false);
   const [showInvoiceDetails, setShowInvoiceDetails] = useState(false);
   const [showInvoices, setShowInvoices] = useState(true);
-  const [editInvoice, setEditInvoice] = useState(false);
+  // const [editInvoice, setEditInvoice] = useState(false);
 
   useEffect(() => {
     setInvoices(invoicesData);
+    console.log(invoicesData[0]);
   }, []);
 
   const filterInvoices = (filterType) => {};
@@ -36,15 +38,25 @@ function App() {
   const goBack = () => {
     setShowInvoiceDetails(false);
     setTimeout(() => {
-      setShowInvoices(true);
+      setShowEditInvoice(true);
     }, 500);
   };
+
+  /* Below is the function which will show the chosen invoice to update */
+
+  const invoiceToUpdate = () => {
+    setShowInvoiceDetails(false);
+    setTimeout(() => {
+      setShowEditInvoice(true);
+    }, 500);
+  };
+
+  /* Below is the function which will select the chosen invoice to display it in detail */
 
   const chosenInvoice = (id, bool) => {
     const selectedInvoice = invoices.filter((invoice) => invoice.id === id);
     setSelectedInvoice(selectedInvoice);
     setShowInvoices(bool);
-
     setTimeout(() => {
       setShowInvoiceDetails(true);
     }, 500);
@@ -61,6 +73,7 @@ function App() {
           selectedInvoice,
           setDayTheme,
           updateInvoice,
+          invoiceToUpdate,
           createdInvoice,
           deleteInvoice,
           goBack,
@@ -88,6 +101,13 @@ function App() {
             <InvoiceDetails />
           </CSSTransition>
         </div>
+        <CSSTransition
+          in={showEditInvoice}
+          timeout={500}
+          classNames='invoicesDetails-move'
+          unmountOnExit>
+          <EditOrCreateInvoice />
+        </CSSTransition>
       </InvoiceContext.Provider>
     </div>
   );

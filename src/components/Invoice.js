@@ -21,7 +21,7 @@ export default function Invoice({ invoice }) {
         in={showInvoices}
         timeout={500}
         mountOnEnter
-        classNames={styles.invoices_move}
+        classNames='invoices-move'
         unmountOnExit>
         <div
           onClick={() => chosenInvoice(id, false)}
