@@ -5,6 +5,7 @@ import Invoice from './Invoice';
 
 export default function Invoices() {
   const { invoices } = useContext(InvoiceContext);
+  console.log(invoices);
   return (
     <>
       {invoices.map((invoice) => (

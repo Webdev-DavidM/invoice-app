@@ -1,0 +1,78 @@
+@import '../App.scss';
+
+// 49 lines of css for a complex form, a great example of how material ui and scss can reduce repetitive css.
+.invoice_edit_create_container {
+  width: 100%;
+  margin-top: 4rem;
+  padding: 2rem;
+  min-height: 100vh;
+  background-color: white;
+
+  border-radius: 0 15px 15px 0;
+  @media only screen and (min-width: 768px) and (max-width: 1023px) {
+    width: 80%;
+    margin: 4rem auto 0;
+  }
+  @media only screen and (min-width: 1024px) {
+    width: 80%;
+    padding: 3rem 8rem;
+    margin: 4rem auto 0;
+  }
+
+  .heading {
+    color: $lighter-purple;
+    margin: 1rem 0;
+  }
+  h4 {
+    color: $faded-purple;
+    padding-bottom: 0.5rem;
+  }
+  input {
+    font-family: $font-family;
+    @include fonts(16px, 24px, -0.8px, 700);
+  }
+
+  .total input {
+    color: $faded-purple;
+  }
+
+  .delete_btn {
+    button svg path {
+      transition: fill 0.4s ease-in-out;
+      fill: $nighttime-lighter-purple;
+    }
+    &:hover button svg path {
+      fill: $purple;
+    }
+  }
+  .cancel_btn {
+    @include buttons(
+      8rem,
+      $faded-purple,
+      rgba(223, 227, 250, 0.3),
+      white,
+      $lighter-purple
+    );
+    padding: 1.5rem;
+    margin-right: 1rem;
+    @include fonts(12px, 15px, -0.25px, 700);
+  }
+
+  .save_changes_btn {
+    @include buttons(14rem, white, $purple, white, $lighter-purple);
+    padding: 1.5rem;
+    @include fonts(12px, 15px, -0.25px, 700);
+  }
+
+  .add_new_item_btn {
+    @include buttons(
+      100%,
+      $faded-purple,
+      rgba(223, 227, 250, 0.3),
+      white,
+      $lighter-purple
+    );
+    padding: 1.5rem;
+    @include fonts(12px, 15px, -0.25px, 700);
+  }
+}

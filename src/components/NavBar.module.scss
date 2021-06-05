@@ -1,4 +1,9 @@
 @import '../App.scss';
+// @import './scss/mixins.scss';
+
+// @import './scss/variables.scss';
+
+// @import './scss/defaults.scss';
 
 /* Navbar */
 
@@ -30,7 +35,7 @@
     width: 4rem;
     position: absolute;
     left: 0;
-    z-index: 100;
+    z-index: 1000;
     border-radius: 1rem 0 1rem 0;
     top: 50%;
     background: $lighter-purple;

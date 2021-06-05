@@ -27,10 +27,6 @@ function App() {
 
   const filterInvoices = (filterType) => {};
 
-  // Below will include making the invoice as draft
-
-  const updateInvoice = (id, updatedInvoice) => {};
-
   const createdInvoice = (id, newInv) => {};
 
   const deleteInvoice = (id) => {};
@@ -44,7 +40,23 @@ function App() {
 
   /* Below is the function which will show the chosen invoice to update */
 
-  const invoiceToUpdate = () => {
+  const invoiceToUpdate = (id, updatedInvoice) => {
+    console.log(updatedInvoice.id);
+    setShowInvoices(false);
+
+    setInvoices(invoices.filter((invoice) => invoice.id !== updatedInvoice.id));
+
+    setInvoices((prevInvoices) => prevInvoices.concat(updatedInvoice));
+
+    setShowEditInvoice(false);
+
+    setTimeout(() => {
+      setShowInvoiceDetails(false);
+      setShowInvoices(true);
+    }, 500);
+  };
+
+  const editInvoice = () => {
     setShowInvoiceDetails(false);
     setTimeout(() => {
       setShowEditInvoice(true);
@@ -53,10 +65,11 @@ function App() {
 
   /* Below is the function which will select the chosen invoice to display it in detail */
 
-  const chosenInvoice = (id, bool) => {
+  const chosenInvoice = (id) => {
+    console.log(id);
     const selectedInvoice = invoices.filter((invoice) => invoice.id === id);
     setSelectedInvoice(selectedInvoice);
-    setShowInvoices(bool);
+    setShowInvoices(false);
     setTimeout(() => {
       setShowInvoiceDetails(true);
     }, 500);
@@ -72,10 +85,11 @@ function App() {
           chosenInvoice,
           selectedInvoice,
           setDayTheme,
-          updateInvoice,
+
           invoiceToUpdate,
           createdInvoice,
           deleteInvoice,
+          editInvoice,
           goBack,
           showInvoices,
           showInvoiceDetails,

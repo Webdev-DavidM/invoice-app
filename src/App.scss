@@ -4,17 +4,24 @@
 
 @import './scss/defaults.scss';
 
-.main-invoice-container {
-  width: 100%;
-  padding: 1rem;
+.App {
   position: relative;
-  margin-top: 4rem;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.main-invoice-container {
+  width: 80%;
+  margin: auto;
+  padding: 0 1rem 0;
+  position: relative;
+  // margin-top: 4rem;
   @media (min-width: 768px) and (max-width: 1023px) {
-    padding: 7rem;
+    padding: 2rem7rem;
   }
   @media only screen and (min-width: 1024px) {
     margin: auto;
-    padding: 8rem;
+    // padding: 8rem;
     max-width: 1200px;
   } /* main container */
 }

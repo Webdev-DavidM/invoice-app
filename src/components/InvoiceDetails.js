@@ -11,7 +11,9 @@ export default function InvoiceDetails() {
   const {
     goBack,
     selectedInvoice,
+
     chosenInvoice,
+    editInvoice,
     invoiceToUpdate,
     deleteInvoice,
   } = useContext(InvoiceContext);
@@ -63,7 +65,7 @@ export default function InvoiceDetails() {
               return (
                 <>
                   <button
-                    onClick={() => invoiceToUpdate()}
+                    onClick={() => editInvoice()}
                     className={styles.edit_button}>
                     Edit
                   </button>
@@ -170,7 +172,7 @@ export default function InvoiceDetails() {
           return (
             <div className={styles.fixed_buttons}>
               <button
-                onClick={() => invoiceToUpdate()}
+                onClick={() => editInvoice()}
                 className={styles.edit_button}>
                 Edit
               </button>

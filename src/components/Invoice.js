@@ -10,10 +10,11 @@ export default function Invoice({ invoice }) {
   const { chosenInvoice, showInvoices } = useContext(InvoiceContext);
   const [formattedDate, setFormattedDate] = useState(null);
 
-  useEffect(() => {
-    const formatDate = formatDateUK(paymentDue);
-    setFormattedDate(formatDate);
-  }, [paymentDue]);
+  // useEffect(() => {
+  //   console.log(paymentDue);
+  //   const formatDate = formatDateUK(paymentDue);
+  //   setFormattedDate(formatDate);
+  // }, [paymentDue]);
 
   return (
     <>
@@ -30,10 +31,10 @@ export default function Invoice({ invoice }) {
             <span>#</span> {id}
           </h4>
           <div className={(styles.due_date, styles.body_2)}>
-            {formattedDate}
+            {/* {formattedDate} */}
           </div>
 
-          <h4 className={styles.total}>£{total.toFixed(2)}</h4>
+          <h4 className={styles.total}>£{total}</h4>
           <div className={(styles.body_2, styles.name)}>{clientName}</div>
           <div className={styles.status_pending}>
             <div className={styles.circle_container}></div>
