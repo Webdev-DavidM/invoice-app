@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useFormik, FormikProvider, FieldArray, Form } from 'formik';
+import { getIn, useFormik, FormikProvider, FieldArray, Form } from 'formik';
 import * as yup from 'yup';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -10,34 +10,43 @@ import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import DeleteIcon from '@material-ui/icons/Delete';
 import styles from './EditOrCreateInvoice.module.scss';
+import { validationSchema } from '././invoiceHelpers/validationSchema';
+import defaultValues from './invoiceHelpers/newInvoiceDefaultValues';
 
-const validationSchema = yup.object().shape({
-  senderAddress: yup.object().shape({
-    street: yup.string().min(2, 'Too Short!'),
-  }),
-  clientName: yup.string().required('need this'),
-  clientEmail: yup.string().required('need this'),
-});
-
-export default function EditOrCreateInvoice() {
+export default function EditInvoice() {
   // const [invoiceData, setInvoiceData] = useState();
+
   const [open, setOpen] = React.useState(false);
+
   let { selectedInvoice, invoiceToUpdate } = useContext(InvoiceContext);
+  console.log(selectedInvoice);
+
   const {
-    senderAddress: { street, city, postCode, country },
-    clientName,
-    clientEmail,
-    clientAddress,
-    paymentTerms,
+    id,
+    createdAt,
     paymentDue,
     description,
+    paymentTerms,
+    clientName,
+    clientEmail,
+    senderAddress: { street, city, postCode, country },
+    clientAddress,
+    status,
     items,
-    id,
+    total,
   } = selectedInvoice[0];
 
   const formik = useFormik({
     // I can use the initial value beow to prefill the form if i am editing it.
     initialValues: {
+      id,
+      createdAt,
+      paymentDue,
+      description,
+      paymentTerms,
+      clientName,
+      clientEmail,
+      status,
       senderAddress: {
         street: street,
         city: city,
@@ -50,19 +59,14 @@ export default function EditOrCreateInvoice() {
         postCode: clientAddress.postCode,
         country: clientAddress.country,
       },
-      paymentDue,
-      clientName,
-      clientEmail,
-      description,
       items,
-      id,
+      total,
     },
     enableReinitialize: true,
-    validationSchema: validationSchema,
+    validationSchema: validationSchema(),
     onSubmit: (values) => {
       console.log(values);
-      invoiceToUpdate(id, values);
-      // setInvoiceData(values);
+      invoiceToUpdate(values);
     },
   });
 
@@ -97,14 +101,14 @@ export default function EditOrCreateInvoice() {
                 name='senderAddress.street'
                 value={formik.values.senderAddress.street}
                 onChange={formik.handleChange}
-                // error={
-                //   formik.touched.senderAddress.street &&
-                //   Boolean(formik.errors.senderAddress.street)
-                // }
-                // helperText={
-                //   formik.touched.senderAddress.street &&
-                //   formik.errors.senderAddress.street
-                // }
+                error={
+                  getIn(formik.touched, 'senderAddress.street') &&
+                  Boolean(getIn(formik.errors, 'senderAddress.street'))
+                }
+                helperText={
+                  getIn(formik.touched, 'senderAddress.street') &&
+                  getIn(formik.errors, 'senderAddress.street')
+                }
               />
             </Grid>
             <Grid item xs={6} md={4}>
@@ -116,14 +120,14 @@ export default function EditOrCreateInvoice() {
                 name='senderAddress.city'
                 value={formik.values.senderAddress.city}
                 onChange={formik.handleChange}
-                // error={
-                //   formik.touched.senderAddress.street &&
-                //   Boolean(formik.errors.senderAddress.street)
-                // }
-                // helperText={
-                //   formik.touched.senderAddress.street &&
-                //   formik.errors.senderAddress.street
-                // }
+                error={
+                  getIn(formik.touched, 'senderAddress.city') &&
+                  Boolean(getIn(formik.errors, 'senderAddress.city'))
+                }
+                helperText={
+                  getIn(formik.touched, 'senderAddress.city') &&
+                  getIn(formik.errors, 'senderAddress.city')
+                }
               />
             </Grid>
             <Grid item xs={6} md={4}>
@@ -135,14 +139,14 @@ export default function EditOrCreateInvoice() {
                 name='senderAddress.postCode'
                 value={formik.values.senderAddress.postCode}
                 onChange={formik.handleChange}
-                // error={
-                //   formik.touched.senderAddress.street &&
-                //   Boolean(formik.errors.senderAddress.street)
-                // }
-                // helperText={
-                //   formik.touched.senderAddress.street &&
-                //   formik.errors.senderAddress.street
-                // }
+                error={
+                  getIn(formik.touched, 'senderAddress.postCode') &&
+                  Boolean(getIn(formik.errors, 'senderAddress.postCode'))
+                }
+                helperText={
+                  getIn(formik.touched, 'senderAddress.postCode') &&
+                  getIn(formik.errors, 'senderAddress.postCode')
+                }
               />
             </Grid>
             <Grid item xs={12} md={4}>
@@ -154,16 +158,14 @@ export default function EditOrCreateInvoice() {
                 name='senderAddress.country'
                 value={formik.values.senderAddress.country}
                 onChange={formik.handleChange}
-                // error={
-
-                //   formik.touched.senderAddress.street &&
-                //   Boolean(formik.errors.senderAddress.street)
-                // }
-                // helperText={
-
-                //   formik.touched.senderAddress.street &&
-                //   formik.errors.senderAddress.street
-                // }
+                error={
+                  getIn(formik.touched, 'senderAddress.country') &&
+                  Boolean(getIn(formik.errors, 'senderAddress.country'))
+                }
+                helperText={
+                  getIn(formik.touched, 'senderAddress.country') &&
+                  getIn(formik.errors, 'senderAddress.country')
+                }
               />
             </Grid>
 
@@ -212,14 +214,14 @@ export default function EditOrCreateInvoice() {
                 name='clientAddress.street'
                 value={formik.values.clientAddress.street}
                 onChange={formik.handleChange}
-                // error={
-                //   formik.touched.clientAddress.street &&
-                //   Boolean(formik.errors.clientAddress.street)
-                // }
-                // helperText={
-                //   formik.touched.clientAddress.street &&
-                //   formik.errors.clientAddress.street
-                // }
+                error={
+                  getIn(formik.touched, 'clientAddress.street') &&
+                  Boolean(getIn(formik.errors, 'clientAddress.street'))
+                }
+                helperText={
+                  getIn(formik.touched, 'clientAddress.street') &&
+                  getIn(formik.errors, 'clientAddress.street')
+                }
               />
             </Grid>
             <Grid item xs={6} md={4}>
@@ -231,14 +233,14 @@ export default function EditOrCreateInvoice() {
                 name='clientAddress.city'
                 value={formik.values.clientAddress.city}
                 onChange={formik.handleChange}
-                // error={
-                //   formik.touched.clientAddress.street &&
-                //   Boolean(formik.errors.clientAddress.street)
-                // }
-                // helperText={
-                //   formik.touched.clientAddress.street &&
-                //   formik.errors.clientAddress.street
-                // }
+                error={
+                  getIn(formik.touched, 'clientAddress.city') &&
+                  Boolean(getIn(formik.errors, 'clientAddress.city'))
+                }
+                helperText={
+                  getIn(formik.touched, 'clientAddress.city') &&
+                  getIn(formik.errors, 'clientAddress.city')
+                }
               />
             </Grid>
             <Grid item xs={6} md={4}>
@@ -250,14 +252,14 @@ export default function EditOrCreateInvoice() {
                 name='clientAddress.postCode'
                 value={formik.values.clientAddress.postCode}
                 onChange={formik.handleChange}
-                // error={
-                //   formik.touched.clientAddress.street &&
-                //   Boolean(formik.errors.clientAddress.street)
-                // }
-                // helperText={
-                //   formik.touched.clientAddress.street &&
-                //   formik.errors.clientAddress.street
-                // }
+                error={
+                  getIn(formik.touched, 'clientAddress.postCode') &&
+                  Boolean(getIn(formik.errors, 'clientAddress.postCode'))
+                }
+                helperText={
+                  getIn(formik.touched, 'clientAddress.postCode') &&
+                  getIn(formik.errors, 'clientAddress.postCode')
+                }
               />
             </Grid>
             <Grid item xs={12} md={4}>
@@ -297,7 +299,7 @@ export default function EditOrCreateInvoice() {
                 }
               />
             </Grid>
-            <Grid item xs={12} md={6}>
+            {/* <Grid item xs={12} md={6}>
               <h4>Payment terms</h4>
               <Select
                 fullWidth
@@ -309,10 +311,10 @@ export default function EditOrCreateInvoice() {
                 onOpen={handleOpen}
                 value={formik.values.paymentTerms}
                 onChange={formik.handleChange}>
-                {[1, 7, 14, 30].map((paymentTerm) => {
+                {[1, 7, 14, 30].map((paymentTerm, index) => {
                   if (paymentTerm !== paymentTerms) {
                     return (
-                      <MenuItem value={paymentTerm}>
+                      <MenuItem value={paymentTerm} key={index}>
                         <h4>
                           Net {paymentTerm}
                           {paymentTerm === 1 ? (
@@ -340,7 +342,7 @@ export default function EditOrCreateInvoice() {
                   }
                 })}
               </Select>
-            </Grid>
+            </Grid> */}
             <Grid item xs={12}>
               <h4>Project description</h4>
               <TextField

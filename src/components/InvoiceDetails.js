@@ -132,8 +132,8 @@ export default function InvoiceDetails() {
                 );
               }}
             />
-            {items.map((item) => (
-              <div className={styles.invoice_item}>
+            {items.map((item, index) => (
+              <div key={index} className={styles.invoice_item}>
                 <h4 className={styles.invoice_name}>{item.name}</h4>
                 <h4 className={styles.invoice_quantity}>
                   {item.quantity}

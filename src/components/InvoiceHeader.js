@@ -5,7 +5,13 @@ import { CSSTransition } from 'react-transition-group';
 import styles from './InvoiceHeader.module.scss';
 
 export default function InvoiceHeader() {
-  const { invoices, dayTheme, setDayTheme } = useContext(InvoiceContext);
+  const {
+    setFilterInvoices,
+    invoices,
+    dayTheme,
+    setDayTheme,
+    displayNewInvoice,
+  } = useContext(InvoiceContext);
   const [showDropDown, setToggleDropDown] = useState(false);
   return (
     <div className={styles.invoice_header_container}>
@@ -45,21 +51,43 @@ export default function InvoiceHeader() {
           unmountOnExit>
           <div className={styles.drop_down_container}>
             <label className='draft'>
-              <input type='checkbox' />
+              <input
+                onChange={() => setFilterInvoices('draft')}
+                type='radio'
+                name='filter'
+              />
               <h4>Draft</h4>
             </label>
             <label className='pending'>
-              <input type='checkbox' />
+              <input
+                onChange={() => setFilterInvoices('pending')}
+                type='radio'
+                name='filter'
+              />
               <h4>Pending</h4>
             </label>
             <label className='paid'>
-              <input type='checkbox' />
+              <input
+                onChange={() => setFilterInvoices('paid')}
+                type='radio'
+                name='filter'
+              />
               <h4>Paid</h4>
+            </label>
+            <label className='paid'>
+              <input
+                onChange={() => setFilterInvoices('none')}
+                type='radio'
+                name='filter'
+              />
+              <h4>All</h4>
             </label>
           </div>
         </CSSTransition>
       </div>
-      <button className={styles.new_invoice_btn}>
+      <button
+        onClick={() => displayNewInvoice()}
+        className={styles.new_invoice_btn}>
         <div className={styles.button_circle}>
           <img
             src={`${process.env.PUBLIC_URL}/assets/icon-plus.svg`}
