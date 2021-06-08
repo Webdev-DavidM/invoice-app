@@ -11,10 +11,11 @@ export default function InvoiceDetails() {
   const {
     goBack,
     selectedInvoice,
-
+    markAsPaid,
     chosenInvoice,
     editInvoice,
     invoiceToUpdate,
+    showDeleteModal,
     deleteInvoice,
   } = useContext(InvoiceContext);
   const {
@@ -69,8 +70,16 @@ export default function InvoiceDetails() {
                     className={styles.edit_button}>
                     Edit
                   </button>
-                  <button className={styles.delete_button}>Delete</button>
-                  <button className={styles.paid_button}>Mark as paid</button>
+                  <button
+                    onClick={() => showDeleteModal(id)}
+                    className={styles.delete_button}>
+                    Delete
+                  </button>
+                  <button
+                    onClick={() => markAsPaid(id)}
+                    className={styles.paid_button}>
+                    Mark as paid
+                  </button>
                 </>
               );
             }}
@@ -176,8 +185,16 @@ export default function InvoiceDetails() {
                 className={styles.edit_button}>
                 Edit
               </button>
-              <button className={styles.delete_button}>Delete</button>
-              <button className={styles.paid_button}>Mark as paid</button>
+              <button
+                onClick={() => showDeleteModal(id)}
+                className={styles.delete_button}>
+                Delete
+              </button>
+              <button
+                onClick={() => markAsPaid(id)}
+                className={styles.paid_button}>
+                Mark as paid
+              </button>
             </div>
           );
         }}

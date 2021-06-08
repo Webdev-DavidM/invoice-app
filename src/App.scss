@@ -8,6 +8,8 @@
   position: relative;
   width: 100%;
   min-height: 100vh;
+  /* this gets rrid of a bug below to make the modal fill screen */
+  border: 1px solid transparent;
 }
 
 .main-invoice-container {
@@ -17,13 +19,60 @@
   position: relative;
   // margin-top: 4rem;
   @media (min-width: 768px) and (max-width: 1023px) {
-    padding: 2rem7rem;
+    padding: 2rem 7rem;
   }
   @media only screen and (min-width: 1024px) {
     margin: auto;
     // padding: 8rem;
     max-width: 1200px;
   } /* main container */
+}
+
+/* delete modal window */
+
+.delete_modal_flex_container {
+  position: fixed;
+  z-index: 1001;
+  top: 0;
+  font-family: $font-family;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background-color: rgba(149, 165, 166, 0.4);
+  .modal_container {
+    background-color: white;
+    width: 60%;
+    max-width: 400px;
+    min-height: 5rem;
+    border-radius: 10px;
+    padding: 2rem;
+    div {
+      color: $faded-purple;
+      padding: 1rem 0;
+    }
+  }
+  .button_container {
+    display: flex;
+    justify-content: flex-end;
+    .cancel_btn {
+      margin-right: 1rem;
+      @include buttons(
+        6rem,
+        $faded-purple,
+        $light-background,
+        white,
+        $lighter-purple
+      );
+      @include fonts(12px, 15px, -0.25px, 700);
+    }
+    .delete_btn {
+      @include buttons(6rem, white, #e74c3c, white, #e17055);
+      @include fonts(12px, 15px, -0.25px, 700);
+    }
+  }
 }
 
 /* dropdown container transition */
