@@ -9,7 +9,7 @@ export default function InvoiceDetails() {
   const [invoiceDate, setInvoiceDate] = useState(null);
 
   const {
-    goBack,
+    goBackDetails,
     selectedInvoice,
     markAsPaid,
     chosenInvoice,
@@ -43,7 +43,7 @@ export default function InvoiceDetails() {
     <>
       <div className={styles.invoice_details_container}>
         <h2 className={styles.go_back_section}>
-          <button onClick={() => goBack()}>
+          <button onClick={() => goBackDetails()}>
             {' '}
             <img
               src={`${process.env.PUBLIC_URL}/assets/icon-arrow-left.svg`}

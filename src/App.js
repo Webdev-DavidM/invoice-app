@@ -34,7 +34,19 @@ function App() {
 
   const createdInvoice = (id, newInv) => {};
 
-  const markAsPaid = (id) => {};
+  const markAsPaid = (id) => {
+    let updatedSelectedInvoice = null;
+    let updatedInvoices = invoices.map((invoice) => {
+      if (invoice.id === id) {
+        updatedSelectedInvoice = { ...invoice, status: 'paid' };
+        return { ...invoice, status: 'paid' };
+      } else {
+        return invoice;
+      }
+    });
+    setInvoices(updatedInvoices);
+    setSelectedInvoice([updatedSelectedInvoice]);
+  };
 
   const deleteInvoice = () => {
     console.log(selectedInvoice[0].id);
@@ -57,6 +69,13 @@ function App() {
     setShowInvoiceDetails(false);
     setTimeout(() => {
       setShowEditInvoice(true);
+    }, 500);
+  };
+
+  const goBackDetails = () => {
+    setShowInvoiceDetails(false);
+    setTimeout(() => {
+      setShowInvoices(true);
     }, 500);
   };
 
@@ -155,6 +174,7 @@ function App() {
           setFilterInvoices,
           setDayTheme,
           displayNewInvoice,
+          markAsPaid,
           // createNewInvoice,
           addNewInvoiceToState,
           invoiceToUpdate,
@@ -164,7 +184,7 @@ function App() {
           editInvoice,
           newInvoice,
           deleteModal,
-
+          goBackDetails,
           goBack,
           showInvoices,
           showInvoiceDetails,
