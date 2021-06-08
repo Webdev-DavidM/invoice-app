@@ -39,6 +39,13 @@ export default function InvoiceDetails() {
     setInvoiceDate(invoiceDate);
   }, [paymentDue, createdAt]);
 
+  const button_style =
+    status === 'paid'
+      ? styles.paid_btn
+      : status === 'draft'
+      ? styles.draft_btn
+      : styles.pending_btn;
+
   return (
     <>
       <div className={styles.invoice_details_container}>
@@ -56,7 +63,7 @@ export default function InvoiceDetails() {
 
         <div className={styles.status_and_button}>
           <h4>status</h4>
-          <div className={styles.status_button}>
+          <div className={button_style}>
             <div className={styles.circle_container}></div>
             {status}
           </div>

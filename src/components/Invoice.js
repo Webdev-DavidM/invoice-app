@@ -16,6 +16,13 @@ export default function Invoice({ invoice }) {
   //   setFormattedDate(formatDate);
   // }, [paymentDue]);
 
+  const button_style =
+    invoice.status === 'paid'
+      ? styles.paid_btn
+      : status === 'draft'
+      ? styles.draft_btn
+      : styles.pending_btn;
+
   return (
     <>
       <CSSTransition
@@ -36,7 +43,7 @@ export default function Invoice({ invoice }) {
 
           <h4 className={styles.total}>£{total}</h4>
           <div className={(styles.body_2, styles.name)}>{clientName}</div>
-          <div className={styles.status_pending}>
+          <div className={button_style}>
             <div className={styles.circle_container}></div>
             {status}
           </div>

@@ -19,7 +19,7 @@
   .status_and_button {
     background-color: white;
     padding: 1rem;
-
+    border: 1px solid red;
     border-radius: 10px;
     box-shadow: 0px 8px 17px -1px rgba(0, 0, 0, 0.05);
     display: flex;
@@ -28,12 +28,41 @@
     h4 {
       color: $faded-purple;
     }
-    .status_button {
-      @include status-button(6rem, 2rem);
-      align-self: center;
-      margin-left: 0.5rem;
-      height: 2.5rem !important;
+    .pending_btn {
+      margin: 0 1rem;
+      @include status_button(
+        8rem,
+        2rem,
+        rgba(243, 156, 18, 1),
+        rgba(243, 156, 18, 0.2),
+        rgba(243, 156, 18, 1)
+      );
     }
+    .paid_btn {
+      margin: 0 1rem;
+      @include status_button(
+        8rem,
+        2rem,
+        rgba(46, 204, 113, 1),
+        rgba(46, 204, 113, 0.2),
+        rgba(46, 204, 113, 1)
+      );
+    }
+    .draft_btn {
+      margin: 0 1rem;
+      @include status_button(
+        8rem,
+        2rem,
+        black,
+        rgba(149, 165, 166, 0.4),
+        black
+      );
+    }
+
+    // .status_button {
+    //   @include status-button(6rem, 2rem);
+
+    // }
     .edit_button {
       margin-left: auto;
       height: 3rem !important;

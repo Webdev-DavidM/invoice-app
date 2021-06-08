@@ -6,22 +6,28 @@
   font-family: $font-family;
 }
 
-@mixin status-button($width, $height) {
+@mixin status_button(
+  $width,
+  $height,
+  $circle_colour,
+  $background,
+  $text-color
+) {
   height: $height;
   cursor: pointer;
-  align-self: flex-end;
+  // align-self: flex-end;
   @include fonts(16px, 24px, -0.8px, 700);
-  width: 8rem;
+  width: $width;
   display: flex;
   padding: 0 1rem;
   justify-content: space-evenly;
-  color: #2ecc71;
-  background-color: rgba(46, 204, 113, 0.1);
+  color: $text-color;
+  background-color: $background;
   align-items: center;
   border-radius: 5px;
-  .circle-container {
+  .circle_container {
     width: 0.6rem;
-    background-color: #2ecc71;
+    background-color: $circle_colour;
     height: 0.6rem;
     border-radius: 50%;
   }

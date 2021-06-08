@@ -46,6 +46,28 @@
     color: $faded-purple;
   }
 
+  .pending_btn {
+    @include status_button(
+      8rem,
+      2rem,
+      rgba(243, 156, 18, 1),
+      rgba(243, 156, 18, 0.2),
+      rgba(243, 156, 18, 1)
+    );
+  }
+  .paid_btn {
+    @include status_button(
+      8rem,
+      2rem,
+      rgba(46, 204, 113, 1),
+      rgba(46, 204, 113, 0.2),
+      rgba(46, 204, 113, 1)
+    );
+  }
+  .draft_btn {
+    @include status_button(8rem, 2rem, black, rgba(149, 165, 166, 0.4), black);
+  }
+
   .status_pending {
     height: 50%;
     align-self: flex-end;
@@ -110,7 +132,9 @@
     .name {
       order: 2;
     }
-    .status_pending {
+    .draft_btn,
+    .pending_btn,
+    .paid_btn {
       order: 4;
     }
     button {
