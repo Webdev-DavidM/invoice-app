@@ -47,6 +47,7 @@
   }
 
   .pending_btn {
+    align-self: flex-end;
     @include status_button(
       8rem,
       2rem,
@@ -56,6 +57,7 @@
     );
   }
   .paid_btn {
+    align-self: flex-end;
     @include status_button(
       8rem,
       2rem,
@@ -65,27 +67,8 @@
     );
   }
   .draft_btn {
-    @include status_button(8rem, 2rem, black, rgba(149, 165, 166, 0.4), black);
-  }
-
-  .status_pending {
-    height: 50%;
     align-self: flex-end;
-    @include fonts(16px, 24px, -0.8px, 700);
-    width: 8rem;
-    display: flex;
-    padding: 0 1rem;
-    justify-content: space-evenly;
-    color: #2ecc71;
-    background-color: rgba(46, 204, 113, 0.1);
-    align-items: center;
-    border-radius: 5px;
-    .circle_container {
-      width: 0.6rem;
-      background-color: #2ecc71;
-      height: 0.6rem;
-      border-radius: 50%;
-    }
+    @include status_button(8rem, 2rem, black, rgba(149, 165, 166, 0.4), black);
   }
 }
 

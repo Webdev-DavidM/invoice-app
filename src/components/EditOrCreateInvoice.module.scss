@@ -1,28 +1,41 @@
 @import '../App.scss';
 
 // 49 lines of css for a complex form, a great example of how material ui and scss can reduce repetitive css.
+
 .invoice_edit_create_container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999;
   width: 100%;
   margin-top: 4rem;
   padding: 2rem;
   min-height: 100vh;
   background-color: white;
-
   border-radius: 0 15px 15px 0;
   @media only screen and (min-width: 768px) and (max-width: 1023px) {
-    width: 80%;
-    margin: 4rem auto 0;
+    width: 70%;
+    // margin: 4rem auto 0;
   }
   @media only screen and (min-width: 1024px) {
-    width: 80%;
+    width: 70%;
     padding: 3rem 8rem;
-    margin: 4rem auto 0;
+    margin-top: 0rem;
   }
 
   .heading {
     color: $lighter-purple;
     margin: 1rem 0;
   }
+
+  .edit_hash {
+    color: $faded-purple;
+  }
+
+  h2 {
+    margin-top: 1rem;
+  }
+
   h4 {
     color: $faded-purple;
     padding-bottom: 0.5rem;
@@ -54,12 +67,13 @@
       $lighter-purple
     );
     padding: 1.5rem;
-    margin-right: 1rem;
+    margin-left: 0;
+    margin-right: auto;
     @include fonts(12px, 15px, -0.25px, 700);
   }
 
   .save_changes_btn {
-    @include buttons(14rem, white, $purple, white, $lighter-purple);
+    @include buttons(9rem, white, $purple, white, $lighter-purple);
     padding: 1.5rem;
     @include fonts(12px, 15px, -0.25px, 700);
   }

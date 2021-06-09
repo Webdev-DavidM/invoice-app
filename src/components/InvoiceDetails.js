@@ -15,6 +15,7 @@ export default function InvoiceDetails() {
     chosenInvoice,
     editInvoice,
     invoiceToUpdate,
+    setBackgroundGreyedOut,
     showDeleteModal,
     deleteInvoice,
   } = useContext(InvoiceContext);

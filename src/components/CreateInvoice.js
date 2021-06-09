@@ -12,15 +12,20 @@ import InputLabel from '@material-ui/core/InputLabel';
 import { validationSchema } from '././invoiceHelpers/validationSchema';
 import DeleteIcon from '@material-ui/icons/Delete';
 import styles from './EditOrCreateInvoice.module.scss';
-import defaultValues from './invoiceHelpers/newInvoiceDefaultValues';
 
 export default function NewInvoice() {
-  // const [invoiceData, setInvoiceData] = useState();
+  const [paymentTermsState, setPaymentTermsState] = useState(30);
 
   const [open, setOpen] = React.useState(false);
 
-  let { newInvoice, addNewInvoiceToState } = useContext(InvoiceContext);
-  console.log(newInvoice);
+  let { newInvoice, addNewInvoiceToState, goBackEditOrCreate, cancel } =
+    useContext(InvoiceContext);
+
+  useEffect(() => {
+    setPaymentTermsState(newInvoice.paymentTerms);
+  }, [newInvoice]);
+
+  const { id, createdAt, paymentTerms } = newInvoice;
 
   const formik = useFormik({
     // I can use the initial value beow to prefill the form if i am editing it.
@@ -28,8 +33,11 @@ export default function NewInvoice() {
     enableReinitialize: true,
     validationSchema: validationSchema(),
     onSubmit: (values) => {
-      console.log(values);
-      addNewInvoiceToState(values);
+      const valuesWithPaymentTermFromState = {
+        ...values,
+        paymentTerms: paymentTermsState,
+      };
+      addNewInvoiceToState(valuesWithPaymentTermFromState);
     },
   });
 
@@ -41,8 +49,9 @@ export default function NewInvoice() {
     setOpen(true);
   };
 
-  const cancel = () => {
+  const resetAndCancel = () => {
     formik.resetForm();
+    cancel();
   };
 
   console.log(formik);
@@ -55,6 +64,7 @@ export default function NewInvoice() {
           style={{ display: 'flex', flexWrap: 'wrap' }}
           onSubmit={formik.handleSubmit}
           fullWidth>
+          <h2>New Invoice</h2>
           <Grid container spacing={3}>
             <Grid item xs={12} p>
               <h4 className={styles.heading}>Bill From</h4>
@@ -273,25 +283,15 @@ export default function NewInvoice() {
                 open={open}
                 variant='outlined'
                 onClose={handleClose}
-                defaultValue={formik.values.paymentTerms}
+                displayEmpty
                 onOpen={handleOpen}
-                value={formik.values.paymentTerms}
-                onChange={formik.handleChange}
-                error={
-                  formik.touched.paymentTerms &&
-                  Boolean(formik.errors.paymentTerms)
-                }
-                helperText={
-                  formik.touched.paymentTerms && formik.errors.paymentTerms
-                }>
-                <MenuItem key={''} value={''}>
-                  No Selected // Or Empty
-                </MenuItem>
+                value={paymentTermsState}
+                onChange={(e) => setPaymentTermsState(e.target.value)}>
                 {[1, 7, 14, 30].map((paymentTerm, index) => {
-                  if (paymentTerm !== formik.values.paymentTerms) {
+                  if (paymentTerm !== paymentTerms) {
                     return (
                       <MenuItem value={paymentTerm} key={index}>
-                        <h4>
+                        <h4 style={{ color: 'black', paddingBottom: '0' }}>
                           Net {paymentTerm}
                           {paymentTerm === 1 ? (
                             <span> Day</span>
@@ -305,9 +305,9 @@ export default function NewInvoice() {
                     return (
                       <MenuItem selected={true}>
                         {' '}
-                        <h4>
-                          Net {formik.values.paymentTerms}
-                          {formik.values.paymentTerms === 1 ? (
+                        <h4 style={{ color: 'black', paddingBottom: '0' }}>
+                          Net {paymentTerm}
+                          {paymentTerm === 1 ? (
                             <span> Day</span>
                           ) : (
                             <span> Days</span>
@@ -464,13 +464,12 @@ export default function NewInvoice() {
 
             <Grid xs={12} container style={{ margin: '1rem 0' }}>
               <button
-                style={{ marginLeft: 'auto' }}
                 className={styles.cancel_btn}
-                onClick={() => cancel()}>
-                Cancel
+                onClick={() => resetAndCancel()}>
+                Discard
               </button>
               <button type='submit' className={styles.save_changes_btn}>
-                Save Changes
+                Save and Send
               </button>
             </Grid>
           </Grid>

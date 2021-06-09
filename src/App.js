@@ -9,30 +9,26 @@ import CreateInvoice from './components/CreateInvoice';
 import InvoiceHeader from './components/InvoiceHeader';
 import newInvoiceDefaultValues from './components/invoiceHelpers/newInvoiceDefaultValues';
 import { CSSTransition } from 'react-transition-group';
-import styles from './App.scss';
+import DeleteModal from './components/DeleteModal';
 export const InvoiceContext = createContext();
 
 function App() {
   const [dayTheme, setDayTheme] = useState(true);
   const [invoices, setInvoices] = useState([]);
-
   const [newInvoice, setNewInvoice] = useState([]);
   const [showNewInvoice, setShowNewinvoice] = useState(false);
   const [filter, setFilterInvoices] = useState('none');
   const [deleteModal, setDeleteModal] = useState(false);
-  // Both the edit invoice page and the invoice details will use the data below //
   const [selectedInvoice, setSelectedInvoice] = useState([]);
+  const [backgroundGreyedOut, setBackgroundGreyedOut] = useState(false);
   const [showEditInvoice, setShowEditInvoice] = useState(false);
   const [showInvoiceDetails, setShowInvoiceDetails] = useState(false);
   const [showInvoices, setShowInvoices] = useState(true);
-  // const [editInvoice, setEditInvoice] = useState(false);
 
   useEffect(() => {
     setInvoices(invoicesData);
     setFilterInvoices(invoicesData);
   }, []);
-
-  const createdInvoice = (id, newInv) => {};
 
   const markAsPaid = (id) => {
     let updatedSelectedInvoice = null;
@@ -61,6 +57,19 @@ function App() {
     }, 500);
   };
 
+  const cancel = () => {
+    setShowEditInvoice(false);
+    setShowNewinvoice(false);
+    setBackgroundGreyedOut(false);
+    setShowInvoiceDetails(false);
+    window.scrollTo(0, 0);
+    setTimeout(() => {
+      setShowInvoices(true);
+    }, 500);
+
+    /* return the user to the top of the screen */
+  };
+
   const showDeleteModal = () => {
     setDeleteModal(true);
   };
@@ -79,9 +88,17 @@ function App() {
     }, 500);
   };
 
+  const goBackEditOrCreate = () => {
+    setShowNewinvoice(false);
+    setShowEditInvoice(false);
+  };
+
   const addNewInvoiceToState = (invoice) => {
     setInvoices(invoices.concat(invoice));
+    setBackgroundGreyedOut(false);
     setShowNewinvoice(false);
+    setShowInvoiceDetails(false);
+    window.scrollTo(0, 0);
     setTimeout(() => {
       setShowInvoices(true);
     }, 500);
@@ -89,42 +106,32 @@ function App() {
 
   const displayNewInvoice = () => {
     let defaultValues = newInvoiceDefaultValues();
-    setShowInvoices(false);
+    setBackgroundGreyedOut(true);
     setNewInvoice(defaultValues);
-    setTimeout(() => {
-      setShowNewinvoice(true);
-    }, 500);
+    setShowNewinvoice(true);
   };
-
-  /* Below is the function which will show the chosen invoice to update */
 
   const invoiceToUpdate = (updatedInvoice) => {
     console.log(updatedInvoice.id);
     setShowInvoices(false);
-
     setInvoices(invoices.filter((invoice) => invoice.id !== updatedInvoice.id));
-
     setInvoices((prevInvoices) => prevInvoices.concat(updatedInvoice));
-
     setShowEditInvoice(false);
-    // setSelectedInvoice([]);
-
+    setBackgroundGreyedOut(false);
+    setShowInvoiceDetails(false);
+    window.scrollTo(0, 0);
     setTimeout(() => {
-      setShowInvoiceDetails(false);
       setShowInvoices(true);
     }, 500);
   };
 
   const editInvoice = () => {
-    setShowInvoiceDetails(false);
-    setTimeout(() => {
-      setShowEditInvoice(true);
-    }, 500);
+    setBackgroundGreyedOut(true);
+    setShowEditInvoice(true);
   };
 
-  /* Below is the function which will select the chosen invoice to display it in detail */
-
   const chosenInvoice = (id) => {
+    setFilterInvoices('none');
     console.log(id);
     const selectedInvoice = invoices.filter((invoice) => invoice.id === id);
     setSelectedInvoice(selectedInvoice);
@@ -136,38 +143,9 @@ function App() {
 
   return (
     <div className='App'>
-      <CSSTransition
-        in={deleteModal}
-        timeout={500}
-        classNames='invoices-move'
-        unmountOnExit>
-        <div className='delete_modal_flex_container'>
-          <div className='modal_container'>
-            <h2>Confirm deletion</h2>
-            <div className='body_1'>
-              Are you sure you want to delete{' '}
-              {selectedInvoice.length !== 0 && selectedInvoice[0].id}? This
-              action cannot be undone.
-            </div>
-            <h4 className='button_container'>
-              <div onClick={() => setDeleteModal(false)} className='cancel_btn'>
-                Cancel
-              </div>
-              <div
-                onClick={() => deleteInvoice()}
-                deleteInvoice
-                className='delete_btn'>
-                Delete
-              </div>
-            </h4>
-          </div>
-        </div>
-      </CSSTransition>
-
       <InvoiceContext.Provider
         value={{
           invoices,
-
           dayTheme,
           chosenInvoice,
           selectedInvoice,
@@ -175,20 +153,30 @@ function App() {
           setDayTheme,
           displayNewInvoice,
           markAsPaid,
-          // createNewInvoice,
+          setDeleteModal,
           addNewInvoiceToState,
           invoiceToUpdate,
-          createdInvoice,
+          cancel,
           showDeleteModal,
           deleteInvoice,
           editInvoice,
           newInvoice,
           deleteModal,
+          setBackgroundGreyedOut,
           goBackDetails,
+          goBackEditOrCreate,
           goBack,
           showInvoices,
           showInvoiceDetails,
         }}>
+        <CSSTransition
+          in={deleteModal}
+          timeout={500}
+          classNames='invoices-move'
+          unmountOnExit>
+          <DeleteModal />
+        </CSSTransition>
+
         <div className='main-invoice-container'>
           <NavBar />
 
@@ -200,7 +188,16 @@ function App() {
             <InvoiceHeader />
           </CSSTransition>
 
-          <Invoices filter={filter} />
+          {invoices.length === 0 ? (
+            <div className='no-invoice-image'>
+              <img
+                src={`${process.env.PUBLIC_URL}/assets/illustration-empty.svg`}
+                alt='no invoices'
+              />
+            </div>
+          ) : (
+            <Invoices filter={filter} />
+          )}
 
           <CSSTransition
             in={showInvoiceDetails}
@@ -210,6 +207,15 @@ function App() {
             <InvoiceDetails />
           </CSSTransition>
         </div>
+
+        <CSSTransition
+          in={backgroundGreyedOut}
+          timeout={500}
+          classNames='invoices-move'
+          unmountOnExit>
+          <div className='greyed_out_background'></div>
+        </CSSTransition>
+
         <CSSTransition
           in={showNewInvoice}
           timeout={500}
@@ -217,6 +223,7 @@ function App() {
           unmountOnExit>
           <CreateInvoice />
         </CSSTransition>
+
         <CSSTransition
           in={showEditInvoice}
           timeout={500}

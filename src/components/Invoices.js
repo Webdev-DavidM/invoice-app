@@ -28,9 +28,10 @@ export default function Invoices({ filter }) {
         break;
       case 'none':
         filteredInvoices = invoices;
-
+        break;
       default:
         filteredInvoices = invoices;
+        break;
     }
     return filteredInvoices.map((invoice) => <Invoice invoice={invoice} />);
   };
