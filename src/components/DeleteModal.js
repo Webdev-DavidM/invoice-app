@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { InvoiceContext } from '../App';
 
 export default function DeleteModal() {
-  const { deleteModal, setDeleteModal, deleteInvoice, selectedInvoice } =
+  const { setDeleteModal, deleteInvoice, selectedInvoice } =
     useContext(InvoiceContext);
 
   return (

@@ -1,6 +1,3 @@
-import { formatDateUK } from '../../helpers/formatDate';
-const { DateTime } = require('luxon');
-
 export const generatePaymentDue = () => {
   const currentDate = new Date();
 

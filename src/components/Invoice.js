@@ -1,20 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import Media from 'react-media';
 import { InvoiceContext } from '../App';
-import { formatDateUK } from '../helpers/formatDate';
 import { CSSTransition } from 'react-transition-group';
 import styles from './Invoice.module.scss';
 
 export default function Invoice({ invoice }) {
-  const { id, paymentDue, clientName, total, status } = invoice;
+  const { id, clientName, total, status } = invoice;
   const { chosenInvoice, showInvoices } = useContext(InvoiceContext);
-  const [formattedDate, setFormattedDate] = useState(null);
-
-  // useEffect(() => {
-  //   console.log(paymentDue);
-  //   const formatDate = formatDateUK(paymentDue);
-  //   setFormattedDate(formatDate);
-  // }, [paymentDue]);
 
   const button_style =
     invoice.status === 'paid'

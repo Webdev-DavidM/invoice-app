@@ -13,7 +13,6 @@ import DeleteModal from './components/DeleteModal';
 export const InvoiceContext = createContext();
 
 function App() {
-  const [dayTheme, setDayTheme] = useState(true);
   const [invoices, setInvoices] = useState([]);
   const [newInvoice, setNewInvoice] = useState([]);
   const [showNewInvoice, setShowNewinvoice] = useState(false);
@@ -45,7 +44,6 @@ function App() {
   };
 
   const deleteInvoice = () => {
-    console.log(selectedInvoice[0].id);
     const newInvoices = invoices.filter(
       (invoice) => invoice.id !== selectedInvoice[0].id
     );
@@ -66,8 +64,6 @@ function App() {
     setTimeout(() => {
       setShowInvoices(true);
     }, 500);
-
-    /* return the user to the top of the screen */
   };
 
   const showDeleteModal = () => {
@@ -112,7 +108,6 @@ function App() {
   };
 
   const invoiceToUpdate = (updatedInvoice) => {
-    console.log(updatedInvoice.id);
     setShowInvoices(false);
     setInvoices(invoices.filter((invoice) => invoice.id !== updatedInvoice.id));
     setInvoices((prevInvoices) => prevInvoices.concat(updatedInvoice));
@@ -132,7 +127,6 @@ function App() {
 
   const chosenInvoice = (id) => {
     setFilterInvoices('none');
-    console.log(id);
     const selectedInvoice = invoices.filter((invoice) => invoice.id === id);
     setSelectedInvoice(selectedInvoice);
     setShowInvoices(false);
@@ -146,11 +140,9 @@ function App() {
       <InvoiceContext.Provider
         value={{
           invoices,
-          dayTheme,
           chosenInvoice,
           selectedInvoice,
           setFilterInvoices,
-          setDayTheme,
           displayNewInvoice,
           markAsPaid,
           setDeleteModal,
