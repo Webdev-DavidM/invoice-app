@@ -8,7 +8,7 @@ const newInvoiceDefaultValues = () => {
     createdAt: generateCreatedAt(),
     paymentDue: '',
     description: '',
-    paymentTerms: 30,
+    // paymentTerms: 30,
     clientName: '',
     clientEmail: '',
     senderAddress: {
@@ -27,12 +27,12 @@ const newInvoiceDefaultValues = () => {
     items: [
       {
         name: '',
-        quantity: 1,
-        price: 0,
+        quantity: null,
+        price: null,
         total: 0,
       },
     ],
-    total: '',
+    total: '0',
   };
 };
 

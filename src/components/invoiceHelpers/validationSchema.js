@@ -40,7 +40,6 @@ export const validationSchema = () =>
     }),
     description: yup.string().min(3).required('Please enter a description'),
     clientName: yup.string().min(3).required('Please enter a client name'),
-    paymentTerms: yup.number().required('Please enter a payment term'),
     clientEmail: yup.string().min(3).required('Please enter a client email'),
 
     items: yup

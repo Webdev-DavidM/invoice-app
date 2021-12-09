@@ -5,13 +5,8 @@ import { CSSTransition } from 'react-transition-group';
 import styles from './InvoiceHeader.module.scss';
 
 export default function InvoiceHeader() {
-  const {
-    setFilterInvoices,
-    invoices,
-    dayTheme,
-    setDayTheme,
-    displayNewInvoice,
-  } = useContext(InvoiceContext);
+  const { setFilterInvoices, invoices, displayNewInvoice } =
+    useContext(InvoiceContext);
   const [showDropDown, setToggleDropDown] = useState(false);
   return (
     <div className={styles.invoice_header_container}>

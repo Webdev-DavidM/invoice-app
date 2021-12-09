@@ -1,6 +1,4 @@
-import { SignalCellularNoSimOutlined } from '@material-ui/icons';
 import React, { useContext } from 'react';
-import { CSSTransition } from 'react-transition-group';
 import { InvoiceContext } from '../App';
 import Invoice from './Invoice';
 
@@ -8,7 +6,6 @@ export default function Invoices({ filter }) {
   const { invoices } = useContext(InvoiceContext);
 
   let invoicesToDisplay = () => {
-    console.log(filter, invoices);
     let filteredInvoices = invoices;
     switch (filter) {
       case 'draft':
@@ -33,7 +30,9 @@ export default function Invoices({ filter }) {
         filteredInvoices = invoices;
         break;
     }
-    return filteredInvoices.map((invoice) => <Invoice invoice={invoice} />);
+    return filteredInvoices.map((invoice, index) => (
+      <Invoice invoice={invoice} key={index} />
+    ));
   };
 
   return <>{invoicesToDisplay()}</>;
