@@ -1,8 +1,8 @@
-import React, { useContext, useState } from 'react';
-import { InvoiceContext } from '../App';
-import Media from 'react-media';
-import { CSSTransition } from 'react-transition-group';
-import styles from './InvoiceHeader.module.scss';
+import React, { useContext, useState } from "react";
+import { InvoiceContext } from "../App";
+import Media from "react-media";
+import { CSSTransition } from "react-transition-group";
+import styles from "./InvoiceHeader.module.scss";
 
 export default function InvoiceHeader() {
   const { setFilterInvoices, invoices, displayNewInvoice } =
@@ -14,11 +14,11 @@ export default function InvoiceHeader() {
         <h2>Invoices</h2>
         <div className={styles.body_2}>
           <Media
-            query='(min-width: 768px)'
+            query="(min-width: 768px)"
             render={() => <span>There are </span>}
           />
           <span>{invoices.length} </span>
-          <Media query='(min-width: 768px)' render={() => <span>total</span>} />
+          <Media query="(min-width: 768px)" render={() => <span>total</span>} />
           <span> invoices</span>
         </div>
       </div>
@@ -26,54 +26,68 @@ export default function InvoiceHeader() {
         <button
           onClick={() =>
             setToggleDropDown((prevToggleState) => !prevToggleState)
-          }>
+          }
+        >
           <h4>
             Filter
             <Media
-              query='(min-width: 768px)'
+              query="(min-width: 768px)"
               render={() => <span> By Status</span>}
             />
           </h4>
           <img
             src={`${process.env.PUBLIC_URL}/assets/icon-arrow-down.svg`}
-            alt=''
+            alt=""
           />
         </button>
         <CSSTransition
           in={showDropDown}
           timeout={500}
-          classNames='alert'
-          unmountOnExit>
+          classNames="alert"
+          unmountOnExit
+        >
           <div className={styles.drop_down_container}>
-            <label className='draft'>
+            <label className="draft">
               <input
-                onChange={() => setFilterInvoices('draft')}
-                type='radio'
-                name='filter'
+                onChange={() => {
+                  setFilterInvoices("draft");
+                  setToggleDropDown(false);
+                }}
+                type="radio"
+                name="filter"
               />
               <h4>Draft</h4>
             </label>
-            <label className='pending'>
+            <label className="pending">
               <input
-                onChange={() => setFilterInvoices('pending')}
-                type='radio'
-                name='filter'
+                onChange={() => {
+                  setFilterInvoices("pending");
+                  setToggleDropDown(false);
+                }}
+                type="radio"
+                name="filter"
               />
               <h4>Pending</h4>
             </label>
-            <label className='paid'>
+            <label className="paid">
               <input
-                onChange={() => setFilterInvoices('paid')}
-                type='radio'
-                name='filter'
+                onChange={() => {
+                  setFilterInvoices("paid");
+                  setToggleDropDown(false);
+                }}
+                type="radio"
+                name="filter"
               />
               <h4>Paid</h4>
             </label>
-            <label className='paid'>
+            <label className="paid">
               <input
-                onChange={() => setFilterInvoices('none')}
-                type='radio'
-                name='filter'
+                onChange={() => {
+                  setFilterInvoices("none");
+                  setToggleDropDown(false);
+                }}
+                type="radio"
+                name="filter"
               />
               <h4>All</h4>
             </label>
@@ -82,16 +96,17 @@ export default function InvoiceHeader() {
       </div>
       <button
         onClick={() => displayNewInvoice()}
-        className={styles.new_invoice_btn}>
+        className={styles.new_invoice_btn}
+      >
         <div className={styles.button_circle}>
           <img
             src={`${process.env.PUBLIC_URL}/assets/icon-plus.svg`}
-            alt='new invoice'
+            alt="new invoice"
           />
         </div>
         <h4>New </h4>
         <Media
-          query='(min-width: 768px)'
+          query="(min-width: 768px)"
           render={() => <h4>&nbsp; Invoice</h4>}
         />
       </button>
