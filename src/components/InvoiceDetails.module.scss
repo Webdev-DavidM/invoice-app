@@ -1,4 +1,4 @@
-@import '../App.scss';
+@import "../App.scss";
 
 /* invoice details container section */
 
@@ -157,7 +157,7 @@
         }
         .invoice_name {
           height: 50%;
-          width: calc(50% -1rem);
+          // width: calc(50% -1rem);
         }
         .invoice_price {
           width: 50%;
