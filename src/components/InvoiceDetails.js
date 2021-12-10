@@ -1,13 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { InvoiceContext } from '../App';
-import { formatDateUK } from '../helpers/formatDate';
-import Media from 'react-media';
-import styles from './InvoiceDetails.module.scss';
+import React, { useContext, useEffect, useState } from "react";
+import { InvoiceContext } from "../App";
+import Media from "react-media";
+import styles from "./InvoiceDetails.module.scss";
+import formatDate from "./invoiceHelpers/formatDate";
+import generateCreatedAt from "./invoiceHelpers/generateCreatedAt";
 
 export default function InvoiceDetails() {
-  const [dueDate, setDueDate] = useState(null);
-  const [invoiceDate, setInvoiceDate] = useState(null);
-
   const {
     goBackDetails,
     selectedInvoice,
@@ -29,17 +27,10 @@ export default function InvoiceDetails() {
     description,
   } = selectedInvoice[0];
 
-  useEffect(() => {
-    let dueDate = formatDateUK(paymentDue);
-    setDueDate(dueDate);
-    let invoiceDate = formatDateUK(createdAt);
-    setInvoiceDate(invoiceDate);
-  }, [paymentDue, createdAt]);
-
   const button_style =
-    status === 'paid'
+    status === "paid"
       ? styles.paid_btn
-      : status === 'draft'
+      : status === "draft"
       ? styles.draft_btn
       : styles.pending_btn;
 
@@ -48,13 +39,13 @@ export default function InvoiceDetails() {
       <div className={styles.invoice_details_container}>
         <h2 className={styles.go_back_section}>
           <button onClick={() => goBackDetails()}>
-            {' '}
+            {" "}
             <img
               src={`${process.env.PUBLIC_URL}/assets/icon-arrow-left.svg`}
-              alt='go back'
+              alt="go back"
             />
             &nbsp; &nbsp; &nbsp;
-            <h4>Go back</h4>{' '}
+            <h4>Go back</h4>{" "}
           </button>
         </h2>
 
@@ -65,23 +56,26 @@ export default function InvoiceDetails() {
             {status}
           </div>
           <Media
-            query='(min-width: 768px)'
+            query="(min-width: 768px)"
             render={() => {
               return (
                 <>
                   <button
                     onClick={() => editInvoice()}
-                    className={styles.edit_button}>
+                    className={styles.edit_button}
+                  >
                     Edit
                   </button>
                   <button
                     onClick={() => showDeleteModal(id)}
-                    className={styles.delete_button}>
+                    className={styles.delete_button}
+                  >
                     Delete
                   </button>
                   <button
                     onClick={() => markAsPaid(id)}
-                    className={styles.paid_button}>
+                    className={styles.paid_button}
+                  >
                     Mark as paid
                   </button>
                 </>
@@ -93,7 +87,7 @@ export default function InvoiceDetails() {
           <h4 className={styles.id_container}>
             <span>#</span> {id}
             <Media
-              query='(min-width: 768px)'
+              query="(min-width: 768px)"
               render={() => {
                 return (
                   <div className={(styles.body_2, styles.description)}>
@@ -111,9 +105,9 @@ export default function InvoiceDetails() {
           </div>
           <div className={styles.payment_dates}>
             <div className={(styles.body_2, styles.invoice)}>Invoice Date</div>
-            <h4>{invoiceDate}</h4>
+            <h4>{createdAt}</h4>
             <div className={(styles.body_2, styles.payment)}>Payment Date</div>
-            <h4>{dueDate}</h4>
+            <h4>{paymentDue}</h4>
           </div>
           <div className={styles.invoice_address}>
             <div className={styles.body_2}>Bill To</div>
@@ -131,7 +125,7 @@ export default function InvoiceDetails() {
 
           <div className={styles.sub_total_and_total_container}>
             <Media
-              query='(min-width: 768px)'
+              query="(min-width: 768px)"
               render={() => {
                 return (
                   <div className={styles.titles_container}>
@@ -151,14 +145,14 @@ export default function InvoiceDetails() {
                 <h4 className={styles.invoice_quantity}>
                   {item.quantity}
                   <Media
-                    query='(max-width: 768px)'
+                    query="(max-width: 768px)"
                     render={() => {
                       return <> x £{parseInt(item).price.toFixed(2) | 0}</>;
                     }}
                   />
                 </h4>
                 <Media
-                  query='(min-width: 768px)'
+                  query="(min-width: 768px)"
                   render={() => {
                     return (
                       <h4 className={styles.invoice_unit_price}>
@@ -180,23 +174,26 @@ export default function InvoiceDetails() {
         </div>
       </div>
       <Media
-        query='(max-width: 768px)'
+        query="(max-width: 768px)"
         render={() => {
           return (
             <div className={styles.fixed_buttons}>
               <button
                 onClick={() => editInvoice()}
-                className={styles.edit_button}>
+                className={styles.edit_button}
+              >
                 Edit
               </button>
               <button
                 onClick={() => showDeleteModal(id)}
-                className={styles.delete_button}>
+                className={styles.delete_button}
+              >
                 Delete
               </button>
               <button
                 onClick={() => markAsPaid(id)}
-                className={styles.paid_button}>
+                className={styles.paid_button}
+              >
                 Mark as paid
               </button>
             </div>

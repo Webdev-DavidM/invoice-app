@@ -1,8 +1,8 @@
 [
   {
     "id": "RT3080",
-    "createdAt": "2021-08-18",
-    "paymentDue": "2021-08-19",
+    "createdAt": "22 June 2018",
+    "paymentDue": "28 December 2021",
     "description": "Re-branding",
     "paymentTerms": 1,
     "clientName": "Jensen Huang",
@@ -32,8 +32,8 @@
   },
   {
     "id": "XM9141",
-    "createdAt": "2021-08-21",
-    "paymentDue": "2021-09-20",
+    "createdAt": "28 May 2019",
+    "paymentDue": "25 December 2021",
     "description": "Graphic Design",
     "paymentTerms": 30,
     "clientName": "Alex Grim",
@@ -69,8 +69,8 @@
   },
   {
     "id": "RG0314",
-    "createdAt": "2021-09-24",
-    "paymentDue": "2021-10-01",
+    "createdAt": "30 February 2020",
+    "paymentDue": "5 December 2021",
     "description": "Website Redesign",
     "paymentTerms": 7,
     "clientName": "John Morrison",
@@ -100,8 +100,8 @@
   },
   {
     "id": "RT2080",
-    "createdAt": "2021-10-11",
-    "paymentDue": "2021-10-12",
+    "paymentDue": "12 December 2021",
+    "createdAt": "4 July 2019",
     "description": "Logo Concept",
     "paymentTerms": 1,
     "clientName": "Alysa Werner",
@@ -131,8 +131,8 @@
   },
   {
     "id": "AA1449",
-    "createdAt": "2021-10-7",
-    "paymentDue": "2021-10-14",
+    "createdAt": "22 November 2020",
+    "paymentDue": "5 December 2021",
     "description": "Re-branding",
     "paymentTerms": 7,
     "clientName": "Mellisa Clarke",
@@ -168,8 +168,8 @@
   },
   {
     "id": "TY9141",
-    "createdAt": "2021-10-01",
-    "paymentDue": "2021-10-31",
+    "createdAt": "5 September 2021",
+    "paymentDue": "5 December 2021",
     "description": "Landing Page Design",
     "paymentTerms": 30,
     "clientName": "Thomas Wayne",
@@ -199,7 +199,7 @@
   },
   {
     "id": "FV2353",
-    "createdAt": "2021-11-05",
+    "createdAt": "5 November 2021",
     "paymentDue": "2021-11-12",
     "description": "Logo Re-design",
     "paymentTerms": 7,

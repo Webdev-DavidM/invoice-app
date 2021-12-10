@@ -1,5 +1,5 @@
-import { formatDateUK } from '../../helpers/formatDate';
-const { DateTime } = require('luxon');
+import { formatDateUK } from "../../helpers/formatDate";
+const { DateTime } = require("luxon");
 
 const generateCreatedAt = () => {
   let time = DateTime.now();
