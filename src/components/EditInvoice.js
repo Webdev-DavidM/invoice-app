@@ -68,9 +68,21 @@ export default function EditInvoice() {
     },
     enableReinitialize: true,
     validationSchema: validationSchema(),
+
     onSubmit: (values) => {
+      // we need to iterate through the items and create a total and pass this to total
+      console.log(values.items.length);
+
+      let total =
+        values.items.length > 1
+          ? values.items.reduce((total, item) => {
+              let subtotal = parseInt(item.price) * item.quantity;
+              return total + subtotal;
+            }, 0)
+          : parseInt(values.items[0].price) * values.items[0].quantity;
       const valuesWithPaymentTermFromState = {
         ...values,
+        total: total,
         paymentTerms: paymentTermsState,
       };
       invoiceToUpdate(valuesWithPaymentTermFromState);

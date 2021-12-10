@@ -157,7 +157,7 @@ export default function InvoiceDetails() {
                   <Media
                     query='(max-width: 768px)'
                     render={() => {
-                      return <> x £{item.price.toFixed(2)}</>;
+                      return <> x £{parseInt(item).price.toFixed(2) | 0}</>;
                     }}
                   />
                 </h4>
@@ -166,20 +166,20 @@ export default function InvoiceDetails() {
                   render={() => {
                     return (
                       <h4 className={styles.invoice_unit_price}>
-                        £ {item.price.toFixed(2)}
+                        £ {parseInt(item.price).toFixed(2) | 0}
                       </h4>
                     );
                   }}
                 />
                 <h4 className={styles.invoice_price}>
-                  £&nbsp;{(item.price * item.quantity).toFixed(2)}
+                  £&nbsp;{parseInt(item.price * item.quantity).toFixed(2) | 0}
                 </h4>
               </div>
             ))}
           </div>
           <div className={styles.grand_total}>
             <div className={styles.body_2}>Grand Total</div>
-            <h2>£&nbsp; {total.toFixed(2)}</h2>
+            <h2>£&nbsp; {parseInt(total).toFixed(2) | 0}</h2>
           </div>
         </div>
       </div>

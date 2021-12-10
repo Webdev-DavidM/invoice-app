@@ -27,7 +27,7 @@ const newInvoiceDefaultValues = () => {
     items: [
       {
         name: '',
-        quantity: 1,
+        quantity: 0,
         price: 0,
         total: 0,
       },

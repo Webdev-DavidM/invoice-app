@@ -45,7 +45,6 @@ function App() {
   };
 
   const deleteInvoice = () => {
-    console.log(selectedInvoice[0].id);
     const newInvoices = invoices.filter(
       (invoice) => invoice.id !== selectedInvoice[0].id
     );
@@ -112,7 +111,6 @@ function App() {
   };
 
   const invoiceToUpdate = (updatedInvoice) => {
-    console.log(updatedInvoice.id);
     setShowInvoices(false);
     setInvoices(invoices.filter((invoice) => invoice.id !== updatedInvoice.id));
     setInvoices((prevInvoices) => prevInvoices.concat(updatedInvoice));
@@ -132,7 +130,6 @@ function App() {
 
   const chosenInvoice = (id) => {
     setFilterInvoices('none');
-    console.log(id);
     const selectedInvoice = invoices.filter((invoice) => invoice.id === id);
     setSelectedInvoice(selectedInvoice);
     setShowInvoices(false);

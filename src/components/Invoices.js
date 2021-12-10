@@ -8,7 +8,6 @@ export default function Invoices({ filter }) {
   const { invoices } = useContext(InvoiceContext);
 
   let invoicesToDisplay = () => {
-    console.log(filter, invoices);
     let filteredInvoices = invoices;
     switch (filter) {
       case 'draft':
