@@ -147,7 +147,7 @@ export default function InvoiceDetails() {
                   <Media
                     query="(max-width: 768px)"
                     render={() => {
-                      return <> x £{parseInt(item).price.toFixed(2) | 0}</>;
+                      return <> x £{parseInt(item.price).toFixed(2) | 0}</>;
                     }}
                   />
                 </h4>

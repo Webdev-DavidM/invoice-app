@@ -55,7 +55,6 @@ export default function NewInvoice() {
         // create the payment due here in a format which can be used
 
         let paymentDueDate = formatDate(values.paymentDue);
-        console.log(paymentDueDate);
 
         const valuesWithPaymentTermFromState = {
           ...values,
