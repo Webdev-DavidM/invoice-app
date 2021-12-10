@@ -13,7 +13,6 @@ import DeleteModal from './components/DeleteModal';
 export const InvoiceContext = createContext();
 
 function App() {
-  const [dayTheme, setDayTheme] = useState(true);
   const [invoices, setInvoices] = useState([]);
   const [newInvoice, setNewInvoice] = useState([]);
   const [showNewInvoice, setShowNewinvoice] = useState(false);
@@ -65,8 +64,6 @@ function App() {
     setTimeout(() => {
       setShowInvoices(true);
     }, 500);
-
-    /* return the user to the top of the screen */
   };
 
   const showDeleteModal = () => {
@@ -143,11 +140,9 @@ function App() {
       <InvoiceContext.Provider
         value={{
           invoices,
-          dayTheme,
           chosenInvoice,
           selectedInvoice,
           setFilterInvoices,
-          setDayTheme,
           displayNewInvoice,
           markAsPaid,
           setDeleteModal,

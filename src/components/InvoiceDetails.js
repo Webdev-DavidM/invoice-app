@@ -12,12 +12,8 @@ export default function InvoiceDetails() {
     goBackDetails,
     selectedInvoice,
     markAsPaid,
-    chosenInvoice,
     editInvoice,
-    invoiceToUpdate,
-    setBackgroundGreyedOut,
     showDeleteModal,
-    deleteInvoice,
   } = useContext(InvoiceContext);
   const {
     status,

@@ -1,14 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
-
 import { useFormik, FormikProvider, FieldArray, Form, getIn } from 'formik';
-import * as yup from 'yup';
-import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import { InvoiceContext } from '../App';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
-import InputLabel from '@material-ui/core/InputLabel';
 import { validationSchema } from '././invoiceHelpers/validationSchema';
 import DeleteIcon from '@material-ui/icons/Delete';
 import styles from './EditOrCreateInvoice.module.scss';
@@ -18,14 +14,13 @@ export default function NewInvoice() {
 
   const [open, setOpen] = React.useState(false);
 
-  let { newInvoice, addNewInvoiceToState, goBackEditOrCreate, cancel } =
-    useContext(InvoiceContext);
+  let { newInvoice, addNewInvoiceToState, cancel } = useContext(InvoiceContext);
 
   useEffect(() => {
     setPaymentTermsState(newInvoice.paymentTerms);
   }, [newInvoice]);
 
-  const { id, createdAt, paymentTerms } = newInvoice;
+  const { paymentTerms } = newInvoice;
 
   const formik = useFormik({
     // I can use the initial value beow to prefill the form if i am editing it.
@@ -54,8 +49,6 @@ export default function NewInvoice() {
     cancel();
   };
 
-  console.log(formik);
-
   return (
     <div className={styles.invoice_edit_create_container}>
       {/* The formikProvider component takes in my react useFormik hook and gives all the values and methods to the components  */}
@@ -63,7 +56,8 @@ export default function NewInvoice() {
         <Form
           style={{ display: 'flex', flexWrap: 'wrap' }}
           onSubmit={formik.handleSubmit}
-          fullWidth>
+          // fullWidth
+        >
           <h2>New Invoice</h2>
           <Grid container spacing={3}>
             <Grid item xs={12} p>
@@ -340,7 +334,7 @@ export default function NewInvoice() {
               />
             </Grid>
 
-            <Grid item container xs={12}>
+            <Grid container>
               <h3>Item List</h3>
             </Grid>
 
@@ -349,14 +343,18 @@ export default function NewInvoice() {
               name='items'
               render={(arrayHelpers) => (
                 <>
-                  <Grid container item xs={12}>
+                  <Grid
+                    container
+
+                    // item xs={12}
+                  >
                     {formik.values.items &&
                       formik.values.items.length > 0 &&
                       formik.values.items.map((item, index) => (
                         <Grid
                           container
-                          item
-                          xs={12}
+                          // item
+                          // xs={12}
                           spacing={3}
                           m={2}
                           style={{ margin: '1rem 0' }}>
@@ -382,6 +380,7 @@ export default function NewInvoice() {
                           <Grid item xs={6} md={3}>
                             <h4>Qty</h4>
                             <TextField
+                              
                               variant='outlined'
                               fullWidth
                               id={`items.${index}`.quantity}
@@ -413,8 +412,10 @@ export default function NewInvoice() {
                               id={`items.${index}.total`}
                               name={`items[${index}].total`}
                               value={
-                                formik.values.items[index].price *
-                                formik.values.items[index].quantity
+                                
+                                parseInt(formik.values.items[index].price) *
+                                parseInt(formik.values.items[index].quantity)
+                                | 0
                               }
                               style={{ border: '1px solid transparent' }}
                               onChange={formik.handleChange}
@@ -434,7 +435,6 @@ export default function NewInvoice() {
                             }}
                             xs={2}
                             md={1}>
-                            {/* <h4>&nbsp;</h4> */}
                             <button onClick={() => arrayHelpers.remove(index)}>
                               <DeleteIcon />
                             </button>
@@ -462,7 +462,10 @@ export default function NewInvoice() {
               )}
             />
 
-            <Grid xs={12} container style={{ margin: '1rem 0' }}>
+            <Grid
+              // xs={12}
+              container
+              style={{ margin: '1rem 0' }}>
               <button
                 className={styles.cancel_btn}
                 onClick={() => resetAndCancel()}>

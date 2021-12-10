@@ -67,7 +67,7 @@
       $lighter-purple
     );
     padding: 1.5rem;
-    margin-left: 0;
+    margin-left: 0 !important;
     margin-right: auto;
     @include fonts(12px, 15px, -0.25px, 700);
   }
