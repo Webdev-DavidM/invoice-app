@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/invoice-app/static/css/main.69db0339.chunk.css",
-    "main.js": "/invoice-app/static/js/main.e9ee0cdc.chunk.js",
-    "main.js.map": "/invoice-app/static/js/main.e9ee0cdc.chunk.js.map",
+    "main.css": "/invoice-app/static/css/main.cc5ec390.chunk.css",
+    "main.js": "/invoice-app/static/js/main.d2da985d.chunk.js",
+    "main.js.map": "/invoice-app/static/js/main.d2da985d.chunk.js.map",
     "runtime-main.js": "/invoice-app/static/js/runtime-main.ad43c001.js",
     "runtime-main.js.map": "/invoice-app/static/js/runtime-main.ad43c001.js.map",
-    "static/js/2.7225e166.chunk.js": "/invoice-app/static/js/2.7225e166.chunk.js",
-    "static/js/2.7225e166.chunk.js.map": "/invoice-app/static/js/2.7225e166.chunk.js.map",
+    "static/js/2.a3eda79b.chunk.js": "/invoice-app/static/js/2.a3eda79b.chunk.js",
+    "static/js/2.a3eda79b.chunk.js.map": "/invoice-app/static/js/2.a3eda79b.chunk.js.map",
     "index.html": "/invoice-app/index.html",
-    "static/css/main.69db0339.chunk.css.map": "/invoice-app/static/css/main.69db0339.chunk.css.map",
-    "static/js/2.7225e166.chunk.js.LICENSE.txt": "/invoice-app/static/js/2.7225e166.chunk.js.LICENSE.txt"
+    "static/css/main.cc5ec390.chunk.css.map": "/invoice-app/static/css/main.cc5ec390.chunk.css.map",
+    "static/js/2.a3eda79b.chunk.js.LICENSE.txt": "/invoice-app/static/js/2.a3eda79b.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.ad43c001.js",
-    "static/js/2.7225e166.chunk.js",
-    "static/css/main.69db0339.chunk.css",
-    "static/js/main.e9ee0cdc.chunk.js"
+    "static/js/2.a3eda79b.chunk.js",
+    "static/css/main.cc5ec390.chunk.css",
+    "static/js/main.d2da985d.chunk.js"
   ]
 }
