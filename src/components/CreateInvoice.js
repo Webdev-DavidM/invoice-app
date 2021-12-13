@@ -5,6 +5,8 @@ import Grid from "@material-ui/core/Grid";
 import { InvoiceContext } from "../App";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
+import validateItems from "./invoiceHelpers/validateItems";
+import calculateTotal from "./invoiceHelpers/calculateTotal";
 import { validationSchema } from "././invoiceHelpers/validationSchema";
 import DeleteIcon from "@material-ui/icons/Delete";
 import styles from "./EditOrCreateInvoice.module.scss";
@@ -15,6 +17,7 @@ export default function NewInvoice() {
 
   const [open, setOpen] = React.useState(false);
   const [itemError, setItemError] = React.useState(null);
+  const [itemDetailsError, setItemDetailsError] = React.useState(null);
 
   let { newInvoice, addNewInvoiceToState, cancel } = useContext(InvoiceContext);
 
@@ -23,15 +26,6 @@ export default function NewInvoice() {
   }, [newInvoice]);
 
   const { paymentTerms } = newInvoice;
-
-  const validateItems = (values) => {
-    if (values.items.length > 0) {
-      return true;
-    } else {
-      setItemError(true);
-      return false;
-    }
-  };
 
   const formik = useFormik({
     //As the formik docs say the items array ( ie field array component) is difficult to validate so I will validate it here instead
@@ -42,27 +36,20 @@ export default function NewInvoice() {
     validationSchema: validationSchema(),
     onSubmit: (values) => {
       if (validateItems(values)) {
-        console.log(values);
-        // get the total of all the items
-        let total =
-          values.items.length > 1
-            ? values.items.reduce((total, item) => {
-                let subtotal = parseInt(item.price) * item.quantity;
-                return total + subtotal;
-              }, 0)
-            : parseInt(values.items[0].price) * values.items[0].quantity;
-
-        // create the payment due here in a format which can be used
-
-        let paymentDueDate = formatDate(values.paymentDue);
-
-        const valuesWithPaymentTermFromState = {
-          ...values,
-          total: total,
-          paymentDue: paymentDueDate,
-          paymentTerms: paymentTermsState,
-        };
-        addNewInvoiceToState(valuesWithPaymentTermFromState);
+        setItemError(null);
+        let total = calculateTotal(values);
+        if (isNaN(total) | (total === "0")) {
+          return setItemDetailsError(true);
+        } else {
+          const valuesWithPaymentTermFromState = {
+            ...values,
+            total: total,
+            paymentTerms: paymentTermsState,
+          };
+          addNewInvoiceToState(valuesWithPaymentTermFromState);
+        }
+      } else {
+        setItemError(true);
       }
     },
   });
@@ -292,9 +279,7 @@ export default function NewInvoice() {
                 defaultValue={formik.values.paymentDue}
                 value={formik.values.paymentDue}
                 onChange={formik.handleChange}
-                error={
-                  formik.touched.paymentDue && Boolean(formik.errors.paymentDue)
-                }
+                error={formik.touched.paymentDue && formik.errors.paymentDue}
                 helperText={
                   formik.touched.paymentDue && formik.errors.paymentDue
                 }
@@ -369,7 +354,6 @@ export default function NewInvoice() {
             <Grid container>
               <h3>Item List</h3>
             </Grid>
-            {itemError && <p>Please provide an item to bill</p>}
             {/* <Form> */}
             <FieldArray
               name="items"
@@ -488,6 +472,17 @@ export default function NewInvoice() {
                 </>
               )}
             />
+            {itemError && (
+              <p className={styles.item_error}>
+                Please provide an item to bill
+              </p>
+            )}
+            {itemDetailsError && (
+              <p className={styles.item_error}>
+                Please fill out all the fields wioth correct values to create a
+                total
+              </p>
+            )}
 
             <Grid
               // xs={12}

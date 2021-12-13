@@ -1,4 +1,4 @@
-@import '../App.scss';
+@import "../App.scss";
 
 // 49 lines of css for a complex form, a great example of how material ui and scss can reduce repetitive css.
 
@@ -88,5 +88,14 @@
     );
     padding: 1.5rem;
     @include fonts(12px, 15px, -0.25px, 700);
+  }
+
+  .item_error {
+    color: red;
+    margin: 5px 0 0 20px;
+    font-size: 12px;
+    font-family: "helvetica";
+    font-weight: 400;
+    letter-spacing: 0.03333em;
   }
 }

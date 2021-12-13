@@ -6,6 +6,8 @@ import { InvoiceContext } from "../App";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import DeleteIcon from "@material-ui/icons/Delete";
+import validateItems from "./invoiceHelpers/validateItems";
+import calculateTotal from "./invoiceHelpers/calculateTotal";
 import styles from "./EditOrCreateInvoice.module.scss";
 import { validationSchema } from "././invoiceHelpers/validationSchema";
 
@@ -13,6 +15,7 @@ export default function EditInvoice() {
   const [paymentTermsState, setPaymentTermsState] = useState(30);
 
   const [itemError, setItemError] = React.useState(null);
+  const [itemDetailsError, setItemDetailsError] = React.useState(null);
 
   const [open, setOpen] = React.useState(false);
 
@@ -33,15 +36,6 @@ export default function EditInvoice() {
     items,
     total,
   } = selectedInvoice[0];
-
-  const validateItems = (values) => {
-    if (values.items.length > 0) {
-      return true;
-    } else {
-      setItemError(true);
-      return false;
-    }
-  };
 
   const formik = useFormik({
     // I can use the initial value beow to prefill the form if i am editing it.
@@ -74,22 +68,23 @@ export default function EditInvoice() {
 
     onSubmit: (values) => {
       // we need to iterate through the items and create a total and pass this to total
-      console.log(values.items.length);
 
       if (validateItems(values)) {
-        let total =
-          values.items.length > 1
-            ? values.items.reduce((total, item) => {
-                let subtotal = parseInt(item.price) * item.quantity;
-                return total + subtotal;
-              }, 0)
-            : parseInt(values.items[0].price) * values.items[0].quantity;
-        const valuesWithPaymentTermFromState = {
-          ...values,
-          total: total,
-          paymentTerms: paymentTermsState,
-        };
-        invoiceToUpdate(valuesWithPaymentTermFromState);
+        console.log(values);
+        setItemError(null);
+        let total = calculateTotal(values);
+        if (isNaN(total) | (total === 0)) {
+          return setItemDetailsError(true);
+        } else {
+          const valuesWithPaymentTermFromState = {
+            ...values,
+            total: total,
+            paymentTerms: paymentTermsState,
+          };
+          invoiceToUpdate(valuesWithPaymentTermFromState);
+        }
+      } else {
+        setItemError(true);
       }
     },
   });
@@ -414,7 +409,6 @@ export default function EditInvoice() {
               xs={12}
             >
               <h3>Item List</h3>
-              {itemError && <p>Please provide an item to bill</p>}
             </Grid>
 
             {/* <Form> */}
@@ -529,7 +523,17 @@ export default function EditInvoice() {
                 </>
               )}
             />
-
+            {itemError && (
+              <p className={styles.item_error}>
+                Please provide an item to bill
+              </p>
+            )}
+            {itemDetailsError && (
+              <p className={styles.item_error}>
+                Please fill out all the fields wioth correct values to create a
+                total
+              </p>
+            )}
             <Grid
               // xs={12}
               container

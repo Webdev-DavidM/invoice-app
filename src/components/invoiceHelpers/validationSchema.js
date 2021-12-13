@@ -38,19 +38,11 @@ export const validationSchema = () =>
         .min(3)
         .required("Please enter a country, minimum 3 characters"),
     }),
+    paymentDue: yup
+      .string()
+      .min(3)
+      .required("Please select a invoice due date"),
     description: yup.string().min(3).required("Please enter a description"),
     clientName: yup.string().min(3).required("Please enter a client name"),
     clientEmail: yup.string().min(3).required("Please enter a client email"),
-
-    // items: yup
-    //   .array()
-    //   .of(
-    //     yup.object().shape({
-    //       name: yup.string().min(3).required("Please enter an item name"),
-    //       quantity: yup.string().min(3).required("Please  enter a quantity "),
-    //       price: yup.number().min(1).required("Please enter a price"),
-    //       total: yup.number().min(1).required("Please enter a total"),
-    //     })
-    //   )
-    //   .required("must have an item"),
   });
