@@ -2,7 +2,7 @@
   {
     "id": "RT3080",
     "createdAt": "22 June 2018",
-    "paymentDue": "28 December 2021",
+    "paymentDue": "2021-03-21",
     "description": "Re-branding",
     "paymentTerms": 1,
     "clientName": "Jensen Huang",
@@ -33,7 +33,7 @@
   {
     "id": "XM9141",
     "createdAt": "28 May 2019",
-    "paymentDue": "25 December 2021",
+    "paymentDue": "2021-12-05",
     "description": "Graphic Design",
     "paymentTerms": 30,
     "clientName": "Alex Grim",
@@ -70,7 +70,7 @@
   {
     "id": "RG0314",
     "createdAt": "30 February 2020",
-    "paymentDue": "5 December 2021",
+    "paymentDue": "2020-05-03",
     "description": "Website Redesign",
     "paymentTerms": 7,
     "clientName": "John Morrison",
@@ -100,8 +100,8 @@
   },
   {
     "id": "RT2080",
-    "paymentDue": "12 December 2021",
-    "createdAt": "4 July 2019",
+    "paymentDue": "2020-10-03",
+    "createdAt": "2019-03-23",
     "description": "Logo Concept",
     "paymentTerms": 1,
     "clientName": "Alysa Werner",
@@ -132,7 +132,7 @@
   {
     "id": "AA1449",
     "createdAt": "22 November 2020",
-    "paymentDue": "5 December 2021",
+    "paymentDue": "2020-04-19",
     "description": "Re-branding",
     "paymentTerms": 7,
     "clientName": "Mellisa Clarke",
@@ -169,7 +169,7 @@
   {
     "id": "TY9141",
     "createdAt": "5 September 2021",
-    "paymentDue": "5 December 2021",
+    "paymentDue": "2021-07-31",
     "description": "Landing Page Design",
     "paymentTerms": 30,
     "clientName": "Thomas Wayne",
@@ -200,7 +200,7 @@
   {
     "id": "FV2353",
     "createdAt": "5 November 2021",
-    "paymentDue": "12 January 2022",
+    "paymentDue": "2021-11-19",
     "description": "Logo Re-design",
     "paymentTerms": 7,
     "clientName": "Anita Wainwright",

@@ -1,31 +1,19 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { useFormik, FormikProvider, FieldArray, Form, getIn } from "formik";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import { InvoiceContext } from "../App";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
 import validateItems from "./invoiceHelpers/validateItems";
 import calculateTotal from "./invoiceHelpers/calculateTotal";
 import { validationSchema } from "././invoiceHelpers/validationSchema";
 import DeleteIcon from "@material-ui/icons/Delete";
 import styles from "./EditOrCreateInvoice.module.scss";
-import formatDate from "./invoiceHelpers/formatDate";
 
 export default function NewInvoice() {
-  const [paymentTermsState, setPaymentTermsState] = useState(30);
-
-  const [open, setOpen] = React.useState(false);
   const [itemError, setItemError] = React.useState(null);
   const [itemDetailsError, setItemDetailsError] = React.useState(null);
 
   let { newInvoice, addNewInvoiceToState, cancel } = useContext(InvoiceContext);
-
-  useEffect(() => {
-    setPaymentTermsState(newInvoice.paymentTerms);
-  }, [newInvoice]);
-
-  const { paymentTerms } = newInvoice;
 
   const formik = useFormik({
     //As the formik docs say the items array ( ie field array component) is difficult to validate so I will validate it here instead
@@ -41,26 +29,17 @@ export default function NewInvoice() {
         if (isNaN(total) | (total === "0")) {
           return setItemDetailsError(true);
         } else {
-          const valuesWithPaymentTermFromState = {
+          const valueToSubmit = {
             ...values,
             total: total,
-            paymentTerms: paymentTermsState,
           };
-          addNewInvoiceToState(valuesWithPaymentTermFromState);
+          addNewInvoiceToState(valueToSubmit);
         }
       } else {
         setItemError(true);
       }
     },
   });
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
 
   const resetAndCancel = () => {
     formik.resetForm();
@@ -74,11 +53,10 @@ export default function NewInvoice() {
         <Form
           style={{ display: "flex", flexWrap: "wrap" }}
           onSubmit={formik.handleSubmit}
-          // fullWidth
         >
           <h2>New Invoice</h2>
           <Grid container spacing={3}>
-            <Grid item xs={12} p>
+            <Grid item xs={12}>
               <h4 className={styles.heading}>Bill From</h4>
               <h4>Street</h4>
               <TextField
@@ -268,7 +246,7 @@ export default function NewInvoice() {
                 }
               />
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12}>
               <h4>Invoice Due</h4>
               <TextField
                 fullWidth
@@ -276,7 +254,6 @@ export default function NewInvoice() {
                 variant="outlined"
                 id="paymentDue"
                 name="paymentDue"
-                defaultValue={formik.values.paymentDue}
                 value={formik.values.paymentDue}
                 onChange={formik.handleChange}
                 error={formik.touched.paymentDue && formik.errors.paymentDue}
@@ -284,51 +261,6 @@ export default function NewInvoice() {
                   formik.touched.paymentDue && formik.errors.paymentDue
                 }
               />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <h4>Payment terms</h4>
-              <Select
-                fullWidth
-                id="demo-controlled-open-select"
-                open={open}
-                variant="outlined"
-                onClose={handleClose}
-                displayEmpty
-                onOpen={handleOpen}
-                value={paymentTermsState}
-                onChange={(e) => setPaymentTermsState(e.target.value)}
-              >
-                {[1, 7, 14, 30].map((paymentTerm, index) => {
-                  if (paymentTerm !== paymentTerms) {
-                    return (
-                      <MenuItem value={paymentTerm} key={index}>
-                        <h4 style={{ color: "black", paddingBottom: "0" }}>
-                          Net {paymentTerm}
-                          {paymentTerm === 1 ? (
-                            <span> Day</span>
-                          ) : (
-                            <span> Days</span>
-                          )}
-                        </h4>
-                      </MenuItem>
-                    );
-                  } else {
-                    return (
-                      <MenuItem selected={true}>
-                        {" "}
-                        <h4 style={{ color: "black", paddingBottom: "0" }}>
-                          Net {paymentTerm}
-                          {paymentTerm === 1 ? (
-                            <span> Day</span>
-                          ) : (
-                            <span> Days</span>
-                          )}
-                        </h4>
-                      </MenuItem>
-                    );
-                  }
-                })}
-              </Select>
             </Grid>
             <Grid item xs={12}>
               <h4>Project description</h4>
@@ -338,7 +270,6 @@ export default function NewInvoice() {
                 variant="outlined"
                 id="description"
                 name="description"
-                defaultValue={formik.values.description}
                 value={formik.values.description}
                 onChange={formik.handleChange}
                 error={
@@ -354,25 +285,17 @@ export default function NewInvoice() {
             <Grid container>
               <h3>Item List</h3>
             </Grid>
-            {/* <Form> */}
             <FieldArray
               name="items"
               render={(arrayHelpers) => (
                 <>
-                  <Grid
-                    container
-
-                    // item xs={12}
-                  >
+                  <Grid>
                     {formik.values.items &&
                       formik.values.items.length > 0 &&
                       formik.values.items.map((item, index) => (
                         <Grid
                           container
-                          // item
-                          // xs={12}
                           spacing={3}
-                          m={2}
                           style={{ margin: "1rem 0" }}
                         >
                           <Grid item xs={6} md={3}>
@@ -410,7 +333,7 @@ export default function NewInvoice() {
                               onChange={formik.handleChange}
                             />
                           </Grid>
-                          <Grid item xs={4} md={2}>
+                          <Grid item="true" xs={4} md={2}>
                             <h4>Total</h4>
                             <TextField
                               disabled={true}
@@ -430,8 +353,6 @@ export default function NewInvoice() {
                               onChange={formik.handleChange}
                             />
                           </Grid>
-
-                          {/* </Grid> */}
                           <Grid
                             item
                             container
@@ -445,14 +366,17 @@ export default function NewInvoice() {
                             xs={2}
                             md={1}
                           >
-                            <button onClick={() => arrayHelpers.remove(index)}>
+                            <button
+                              type="button"
+                              onClick={() => arrayHelpers.remove(index)}
+                            >
                               <DeleteIcon />
                             </button>
                           </Grid>
                         </Grid>
                       ))}
                   </Grid>
-                  <Grid xs={12}>
+                  <Grid item xs={12}>
                     <button
                       className={styles.add_new_item_btn}
                       type="button"
@@ -465,7 +389,6 @@ export default function NewInvoice() {
                         })
                       }
                     >
-                      {/* show this when user has removed all friends from the list */}
                       + Add New Item
                     </button>
                   </Grid>
@@ -484,12 +407,9 @@ export default function NewInvoice() {
               </p>
             )}
 
-            <Grid
-              // xs={12}
-              container
-              style={{ margin: "1rem 0" }}
-            >
+            <Grid container style={{ margin: "1rem 0" }}>
               <button
+                type="button"
                 className={styles.cancel_btn}
                 onClick={() => resetAndCancel()}
               >

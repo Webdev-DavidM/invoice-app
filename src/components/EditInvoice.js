@@ -1,10 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { getIn, useFormik, FormikProvider, FieldArray, Form } from "formik";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import { InvoiceContext } from "../App";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
 import DeleteIcon from "@material-ui/icons/Delete";
 import validateItems from "./invoiceHelpers/validateItems";
 import calculateTotal from "./invoiceHelpers/calculateTotal";
@@ -12,12 +10,8 @@ import styles from "./EditOrCreateInvoice.module.scss";
 import { validationSchema } from "././invoiceHelpers/validationSchema";
 
 export default function EditInvoice() {
-  const [paymentTermsState, setPaymentTermsState] = useState(30);
-
-  const [itemError, setItemError] = React.useState(null);
-  const [itemDetailsError, setItemDetailsError] = React.useState(null);
-
-  const [open, setOpen] = React.useState(false);
+  const [itemError, setItemError] = useState(null);
+  const [itemDetailsError, setItemDetailsError] = useState(null);
 
   let { selectedInvoice, invoiceToUpdate, cancel, goBackEditOrCreate } =
     useContext(InvoiceContext);
@@ -27,7 +21,6 @@ export default function EditInvoice() {
     createdAt,
     paymentDue,
     description,
-    paymentTerms,
     clientName,
     clientEmail,
     senderAddress: { street, city, postCode, country },
@@ -44,7 +37,6 @@ export default function EditInvoice() {
       createdAt,
       paymentDue,
       description,
-      paymentTerms,
       clientName,
       clientEmail,
       status,
@@ -67,35 +59,23 @@ export default function EditInvoice() {
     validationSchema: validationSchema(),
 
     onSubmit: (values) => {
-      // we need to iterate through the items and create a total and pass this to total
-
       if (validateItems(values)) {
-        console.log(values);
         setItemError(null);
         let total = calculateTotal(values);
         if (isNaN(total) | (total === 0)) {
           return setItemDetailsError(true);
         } else {
-          const valuesWithPaymentTermFromState = {
+          const valuesToSubmit = {
             ...values,
             total: total,
-            paymentTerms: paymentTermsState,
           };
-          invoiceToUpdate(valuesWithPaymentTermFromState);
+          invoiceToUpdate(valuesToSubmit);
         }
       } else {
         setItemError(true);
       }
     },
   });
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
 
   const resetForm = () => {
     formik.resetForm();
@@ -109,9 +89,9 @@ export default function EditInvoice() {
         <Form
           style={{ display: "flex", flexWrap: "wrap" }}
           onSubmit={formik.handleSubmit}
-          // fullWidth
         >
           <button
+            type="button"
             onClick={() => goBackEditOrCreate()}
             style={{ display: "flex", color: "black", width: "100%" }}
           >
@@ -128,7 +108,7 @@ export default function EditInvoice() {
             {id}
           </h2>
           <Grid container spacing={3}>
-            <Grid item xs={12} p>
+            <Grid item xs={12}>
               <h4 className={styles.heading}>Bill From</h4>
               <h4>Street</h4>
               <TextField
@@ -317,7 +297,7 @@ export default function EditInvoice() {
                 }
               />
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12}>
               <h4>Invoice Due</h4>
               <TextField
                 fullWidth
@@ -325,7 +305,6 @@ export default function EditInvoice() {
                 variant="outlined"
                 id="paymentDue"
                 name="paymentDue"
-                defaultValue={paymentDue}
                 value={formik.values.paymentDue}
                 onChange={formik.handleChange}
                 error={
@@ -336,51 +315,7 @@ export default function EditInvoice() {
                 }
               />
             </Grid>
-            <Grid item xs={12} md={6}>
-              <h4>Payment terms</h4>
-              <Select
-                fullWidth
-                id="demo-controlled-open-select"
-                open={open}
-                variant="outlined"
-                onClose={handleClose}
-                displayEmpty
-                onOpen={handleOpen}
-                value={paymentTermsState}
-                onChange={(e) => setPaymentTermsState(e.target.value)}
-              >
-                {[1, 7, 14, 30].map((paymentTerm, index) => {
-                  if (paymentTerm !== paymentTerms) {
-                    return (
-                      <MenuItem value={paymentTerm} key={index}>
-                        <h4 style={{ color: "black", paddingBottom: "0" }}>
-                          Net {paymentTerm}
-                          {paymentTerm === 1 ? (
-                            <span> Day</span>
-                          ) : (
-                            <span> Days</span>
-                          )}
-                        </h4>
-                      </MenuItem>
-                    );
-                  } else {
-                    return (
-                      <MenuItem selected={true} key={index}>
-                        {" "}
-                        <h4 style={{ color: "black", paddingBottom: "0" }}>
-                          Net {paymentTerms}
-                          {paymentTerms === 1 ? (
-                            <span> Day</span>
-                          ) : (
-                            <span> Days</span>
-                          )}
-                        </h4>
-                      </MenuItem>
-                    );
-                  }
-                })}
-              </Select>
-            </Grid>
+
             <Grid item xs={12}>
               <h4>Project description</h4>
               <TextField
@@ -389,7 +324,6 @@ export default function EditInvoice() {
                 variant="outlined"
                 id="description"
                 name="description"
-                defaultValue={description}
                 value={formik.values.description}
                 onChange={formik.handleChange}
                 error={
@@ -402,16 +336,9 @@ export default function EditInvoice() {
               />
             </Grid>
 
-            <Grid
-              item
-              // container
-
-              xs={12}
-            >
+            <Grid item xs={12}>
               <h3>Item List</h3>
             </Grid>
-
-            {/* <Form> */}
             <FieldArray
               name="items"
               render={(arrayHelpers) => (
@@ -424,7 +351,6 @@ export default function EditInvoice() {
                           container
                           key={index}
                           spacing={3}
-                          m={2}
                           style={{ margin: "1rem 0" }}
                         >
                           <Grid item xs={6} md={3}>
@@ -482,6 +408,8 @@ export default function EditInvoice() {
 
                           <Grid
                             item
+                            xs={2}
+                            md={1}
                             className={styles.delete_btn}
                             style={{
                               alignItems: "center",
@@ -489,13 +417,11 @@ export default function EditInvoice() {
                               marginTop: "1rem",
                               paddingRight: "0",
                             }}
-                            xs={2}
-                            md={1}
                           >
                             <button
+                              type="button"
                               onClick={() => {
                                 arrayHelpers.remove(index);
-                                setOpen(true);
                               }}
                             >
                               <DeleteIcon />
@@ -504,7 +430,7 @@ export default function EditInvoice() {
                         </Grid>
                       ))}
                   </Grid>
-                  <Grid xs={12}>
+                  <Grid item xs={12}>
                     <button
                       className={styles.add_new_item_btn}
                       type="button"
@@ -534,12 +460,9 @@ export default function EditInvoice() {
                 total
               </p>
             )}
-            <Grid
-              // xs={12}
-              container
-              style={{ margin: "1rem 0" }}
-            >
+            <Grid container style={{ margin: "1rem 0" }}>
               <button
+                type="submit"
                 style={{ marginLeft: "auto" }}
                 className={styles.cancel_btn}
                 onClick={() => resetForm()}

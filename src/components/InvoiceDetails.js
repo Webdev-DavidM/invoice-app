@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { InvoiceContext } from "../App";
 import Media from "react-media";
 import styles from "./InvoiceDetails.module.scss";
 import formatDate from "./invoiceHelpers/formatDate";
-import generateCreatedAt from "./invoiceHelpers/generateCreatedAt";
 
 export default function InvoiceDetails() {
   const {
@@ -107,7 +106,7 @@ export default function InvoiceDetails() {
             <div className={(styles.body_2, styles.invoice)}>Invoice Date</div>
             <h4>{createdAt}</h4>
             <div className={(styles.body_2, styles.payment)}>Payment Date</div>
-            <h4>{paymentDue}</h4>
+            <h4>{formatDate(paymentDue)}</h4>
           </div>
           <div className={styles.invoice_address}>
             <div className={styles.body_2}>Bill To</div>

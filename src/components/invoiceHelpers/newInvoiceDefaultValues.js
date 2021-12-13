@@ -1,6 +1,5 @@
 import generateNewInvoiceID from "./generateNewInvoiceID";
 import generateCreatedAt from "./generateCreatedAt";
-import { generatePaymentDue } from "./formatDate";
 
 const newInvoiceDefaultValues = () => {
   return {
@@ -8,7 +7,6 @@ const newInvoiceDefaultValues = () => {
     createdAt: generateCreatedAt(),
     paymentDue: "",
     description: "",
-    // paymentTerms: 30,
     clientName: "",
     clientEmail: "",
     senderAddress: {
