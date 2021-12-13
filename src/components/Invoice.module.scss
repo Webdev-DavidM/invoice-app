@@ -1,4 +1,4 @@
-@import '../App.scss';
+@import "../App.scss";
 
 /* Invoice container */
 
@@ -81,7 +81,7 @@
     justify-content: space-evenly;
     height: 5rem;
     &:hover {
-      cursor: unset;
+      cursor: pointer;
     }
     .id_container,
     .name,
