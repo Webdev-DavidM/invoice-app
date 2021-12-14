@@ -32,7 +32,7 @@ Built with
 
 ### Still to do
 
-There is a bug when you delete the first item in the invoice. The invoice then closes. The item is deleted but it is tedious to have to back in to check this. This issue is a formik issue so I need to contact them to resolve this issue
+There is a bug when you delete the first item in the invoice. The invoice then closes. The item is deleted but it is tedious to have to go back in to check this. This issue is a formik issue so I need to contact them to resolve this issue.
 
 # To run locally
 
