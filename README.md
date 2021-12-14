@@ -13,7 +13,7 @@ This invoice application, created with React allows the use to create, edit and 
 
 ## Screenshot
 
-![](/src/images/screenshot.png)
+![](/invoice.jpg)
 
 ## Live site
 
