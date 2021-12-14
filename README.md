@@ -1,70 +1,43 @@
-# Getting Started with Create React App
+# Invoice application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+This invoice application, created with React allows the use to create, edit and delete a list of invoices as well as filter them based status.
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- A user can filter the list of invoices based on being draft, paid pending etc
+- The user can click on an invoice which will show the invoice in more detail, from there they can edit or delete the invoice
+- The user can create a new invoice which will create a unique ID for itself and uses todays date as the invoice date
+- The form has validation which makes sure the user fills out all the relevant fields.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Screenshot
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+![](/src/images/screenshot.png)
 
-### `npm test`
+## Live site
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+https://webdev-davidm.github.io/invoice-app/
 
-### `npm run build`
+## My process
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Built with
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- React and React hooks
+- Material UI and Formik is used to create the form and validation
+- SASS
+- React transition group is used to create exiting transitions as forms enter and leave the page
+- Mobile-first workflow
+- Developed from Sketch design prototypes
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Still to do
 
-### `npm run eject`
+There is a bug when you delete the first item in the invoice. The invoice then closes. The item is deleted but it is tedious to have to back in to check this. This issue is a formik issue so I need to contact them to resolve this issue
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+# To run locally
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+To run this project please download and from the terminal
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- type npm i to load the dependencies
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- npm start to view the project.
