@@ -398,8 +398,9 @@ export default function EditInvoice() {
                               id={`items.${index}.total`}
                               name={`items[${index}].total`}
                               value={
-                                formik.values.items[index].price *
-                                formik.values.items[index].quantity
+                                (formik.values.items[index].price *
+                                  formik.values.items[index].quantity) |
+                                0
                               }
                               style={{ border: "1px solid transparent" }}
                               onChange={formik.handleChange}
@@ -456,7 +457,7 @@ export default function EditInvoice() {
             )}
             {itemDetailsError && (
               <p className={styles.item_error}>
-                Please fill out all the fields wioth correct values to create a
+                Please fill out all the fields with correct values to create a
                 total
               </p>
             )}

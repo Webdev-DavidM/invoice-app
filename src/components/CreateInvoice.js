@@ -402,7 +402,7 @@ export default function NewInvoice() {
             )}
             {itemDetailsError && (
               <p className={styles.item_error}>
-                Please fill out all the fields wioth correct values to create a
+                Please fill out all the fields with correct values to create a
                 total
               </p>
             )}
