@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/invoice-app/static/css/main.d8199b0b.chunk.css",
-    "main.js": "/invoice-app/static/js/main.d35c1c2b.chunk.js",
-    "main.js.map": "/invoice-app/static/js/main.d35c1c2b.chunk.js.map",
+    "main.js": "/invoice-app/static/js/main.01da961c.chunk.js",
+    "main.js.map": "/invoice-app/static/js/main.01da961c.chunk.js.map",
     "runtime-main.js": "/invoice-app/static/js/runtime-main.ad43c001.js",
     "runtime-main.js.map": "/invoice-app/static/js/runtime-main.ad43c001.js.map",
     "static/js/2.588fc43e.chunk.js": "/invoice-app/static/js/2.588fc43e.chunk.js",
@@ -15,6 +15,6 @@
     "static/js/runtime-main.ad43c001.js",
     "static/js/2.588fc43e.chunk.js",
     "static/css/main.d8199b0b.chunk.css",
-    "static/js/main.d35c1c2b.chunk.js"
+    "static/js/main.01da961c.chunk.js"
   ]
 }
